@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "336865484828",
+    "project_id": "my-shedule",
+    "storage_bucket": "my-shedule.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336865484828:android:7e268320613cc2fa14bfd9",
+        "android_client_info": {
+          "package_name": "com.example.my_shedule"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA-GXx1vU7f2pgGAhtf4ZdHamMVTXsSO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
