@@ -1,5 +1,7 @@
 // lib/core/utils/helpers.dart
 
+import 'package:flutter/material.dart';
+
 class DateHelper {
   /// Форматирует дату в строку по указанному шаблону.
   static String formatDate(
@@ -19,5 +21,21 @@ class StringHelper {
   ) {
     if (text.length <= maxLength) return text;
     return '${text.substring(0, maxLength)}...';
+  }
+}
+
+class MessageHelper {
+  /// Возвращает сообщение об ошибке.
+  static displayError(BuildContext context, String message) {
+    AlertDialog(
+      title: const Text('Ошибка'),
+      content: Text(message),
+      actions: [
+        TextButton(
+          child: const Text('ОК'),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ],
+    );
   }
 }

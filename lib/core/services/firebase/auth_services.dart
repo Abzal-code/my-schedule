@@ -1,21 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class Auth {
+abstract class AuthServices {
   Future<void> signIn(String email, String password);
   Future<void> signUp(String email, String password);
   Future<void> signOut();
 }
 
-class AuthImpl extends Auth {
+class AuthServicesImpl extends AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  AuthImpl();
+  AuthServicesImpl();
 
   @override
-  Future<void> signIn(
-    String email,
-    String password,
-  ) async {
+  Future<void> signIn(String email, String password) async {
     await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -23,10 +20,7 @@ class AuthImpl extends Auth {
   }
 
   @override
-  Future<void> signUp(
-    String email,
-    String password,
-  ) async {
+  Future<void> signUp(String email, String password) async {
     await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
