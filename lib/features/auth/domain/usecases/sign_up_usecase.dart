@@ -1,6 +1,4 @@
-import 'package:my_shedule/core/usecases/usecase.dart';
-import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
-import 'package:my_shedule/features/auth/domain/usecases/auth_params.dart';
+part of 'auth_usecases.dart';
 
 class SignUpUsecase extends UseCase<void, AuthParams> {
   final AuthRepository _authRepository;

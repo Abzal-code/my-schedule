@@ -1,5 +1,4 @@
-import 'package:my_shedule/core/usecases/usecase.dart';
-import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
+part of 'auth_usecases.dart';
 
 // Реализация SignOutUseCase
 class SignOutUseCase extends UseCase<Unit, NoParams> {

@@ -1,11 +1,15 @@
+import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/core/services/firebase/auth_services.dart';
 import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryimpl implements AuthRepository {
-  final AuthServices _services = AuthServicesImpl();
+  final AuthServices _services = locator<AuthServices>();
 
   @override
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn(
+    String email,
+    String password,
+  ) async {
     await _services.signIn(email, password);
   }
 
@@ -15,7 +19,10 @@ class AuthRepositoryimpl implements AuthRepository {
   }
 
   @override
-  Future<void> signUp(String email, String password) async {
+  Future<void> signUp(
+    String email,
+    String password,
+  ) async {
     await _services.signUp(email, password);
   }
 }

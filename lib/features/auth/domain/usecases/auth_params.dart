@@ -1,3 +1,5 @@
+part of 'auth_usecases.dart';
+
 class AuthParams {
   final String email;
   final String password;
