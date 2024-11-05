@@ -4,7 +4,7 @@ import 'package:my_shedule/core/services/firebase/auth_services.dart';
 import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryimpl implements AuthRepository {
-  final AuthServices _services = locator<AuthServices>();
+  final AuthServices _services = sl<AuthServices>();
 
   @override
   Future<void> signIn(

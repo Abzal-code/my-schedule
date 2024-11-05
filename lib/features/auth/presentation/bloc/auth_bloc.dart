@@ -71,8 +71,8 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
     }
   }
 
-   Future<void> _checkAuthentication(Emitter<AuthState> emit) async {
-    emit(const AuthState.loading());
+  Future<void> _checkAuthentication(Emitter<AuthState> emit) async {
+    await Future.delayed(const Duration(seconds: 2));
     try {
       final user = await _getCurrentUserUseCase.call(const NoParams());
       if (user != null) {
@@ -82,7 +82,8 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
       }
     } catch (e) {
       emit(const AuthState.error());
-      addUIAction(ShowErrorAction('Ошибка при проверке авторизации: ${e.toString()}'));
+      addUIAction(
+          ShowErrorAction('Ошибка при проверке авторизации: ${e.toString()}'));
     }
   }
 }

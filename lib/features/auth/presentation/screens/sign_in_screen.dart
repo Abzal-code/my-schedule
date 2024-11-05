@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:my_shedule/features/auth/presentation/screens/sign_up_screen.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 
@@ -53,8 +53,7 @@ class SignInScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()));
+                context.push('/signUp');
               },
               child: const Text('Don’t have an account? Sign Up'),
             ),

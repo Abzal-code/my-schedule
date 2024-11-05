@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:my_shedule/features/shedule/presentation/pages/schedule_screen.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 

@@ -5,26 +5,26 @@ import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dar
 import 'package:my_shedule/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 
-final GetIt locator = GetIt.instance;
+final GetIt sl = GetIt.instance;
 
 void setupCoreLocator() {
   // Регистрация сервисов
-  locator.registerLazySingleton<AuthServices>(() => AuthServicesImpl());
+  sl.registerLazySingleton<AuthServices>(() => AuthServicesImpl());
   // Регистрация репозиториев
-  locator.registerLazySingleton<AuthRepository>(() => AuthRepositoryimpl());
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryimpl());
 
   // Регистрация use cases
-  locator.registerFactory(() => SignInUseCase(locator<AuthRepository>()));
-  locator.registerFactory(() => SignOutUseCase(locator<AuthRepository>()));
-  locator.registerFactory(() => SignUpUsecase(locator<AuthRepository>()));
-  locator
-      .registerFactory(() => GetCurrentUserUseCase(locator<AuthRepository>()));
+  sl.registerFactory(() => SignInUseCase(sl<AuthRepository>()));
+  sl.registerFactory(() => SignOutUseCase(sl<AuthRepository>()));
+  sl.registerFactory(() => SignUpUsecase(sl<AuthRepository>()));
+  sl
+      .registerFactory(() => GetCurrentUserUseCase(sl<AuthRepository>()));
 
   // Регистрация других сервисов и зависимостей можно добавить здесь
-  locator.registerFactory(() => AuthBloc(
-        signInUseCase: locator<SignInUseCase>(),
-        signOutUseCase: locator<SignOutUseCase>(),
-        signUpUseCase: locator<SignUpUsecase>(),
-        getCurrentUserUseCase: locator<GetCurrentUserUseCase>(),
+  sl.registerFactory(() => AuthBloc(
+        signInUseCase: sl<SignInUseCase>(),
+        signOutUseCase: sl<SignOutUseCase>(),
+        signUpUseCase: sl<SignUpUsecase>(),
+        getCurrentUserUseCase: sl<GetCurrentUserUseCase>(),
       ));
 }
