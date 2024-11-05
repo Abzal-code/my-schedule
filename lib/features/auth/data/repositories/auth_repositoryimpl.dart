@@ -23,7 +23,6 @@ class AuthRepositoryimpl implements AuthRepository {
     String email,
     String password,
   ) async {
-    print('AuthRepositoryimpl: ${email} ${password}');
     await _services.signUp(email, password);
   }
 }

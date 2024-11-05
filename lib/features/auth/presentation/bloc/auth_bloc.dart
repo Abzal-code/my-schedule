@@ -45,7 +45,6 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
   }
 
   Future<void> _signUp(_SignUpEvent event, Emitter<AuthState> emit) async {
-    print('event: ${event.email} ${event.password}');
     emit(const AuthState.loading());
     try {
       await _signUpUseCase
