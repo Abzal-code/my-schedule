@@ -17,11 +17,14 @@ void setupCoreLocator() {
   locator.registerFactory(() => SignInUseCase(locator<AuthRepository>()));
   locator.registerFactory(() => SignOutUseCase(locator<AuthRepository>()));
   locator.registerFactory(() => SignUpUsecase(locator<AuthRepository>()));
+  locator
+      .registerFactory(() => GetCurrentUserUseCase(locator<AuthRepository>()));
 
   // Регистрация других сервисов и зависимостей можно добавить здесь
   locator.registerFactory(() => AuthBloc(
         signInUseCase: locator<SignInUseCase>(),
         signOutUseCase: locator<SignOutUseCase>(),
         signUpUseCase: locator<SignUpUsecase>(),
+        getCurrentUserUseCase: locator<GetCurrentUserUseCase>(),
       ));
 }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/core/services/firebase_options.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:my_shedule/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:my_shedule/features/auth/presentation/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +23,13 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
-            create: (context) => locator<AuthBloc>(),
+            create: (context) => locator<AuthBloc>()
+              ..add(
+                const AuthEvent.checkAuthentication(),
+              ),
           ),
         ],
-        child: SignUpScreen(),
+        child: const SplashScreen(),
       ),
     );
   }

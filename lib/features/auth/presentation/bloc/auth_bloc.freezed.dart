@@ -21,6 +21,7 @@ mixin _$AuthEvent {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() signOut,
+    required TResult Function() checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AuthEvent {
     TResult? Function(String email, String password)? signIn,
     TResult? Function(String email, String password)? signUp,
     TResult? Function()? signOut,
+    TResult? Function()? checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AuthEvent {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? signOut,
+    TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,8 @@ mixin _$AuthEvent {
     required TResult Function(_SignInEvent value) signIn,
     required TResult Function(_SignUpEvent value) signUp,
     required TResult Function(_SignOutEvent value) signOut,
+    required TResult Function(_CheckAuthenticationEvent value)
+        checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +55,7 @@ mixin _$AuthEvent {
     TResult? Function(_SignInEvent value)? signIn,
     TResult? Function(_SignUpEvent value)? signUp,
     TResult? Function(_SignOutEvent value)? signOut,
+    TResult? Function(_CheckAuthenticationEvent value)? checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +63,7 @@ mixin _$AuthEvent {
     TResult Function(_SignInEvent value)? signIn,
     TResult Function(_SignUpEvent value)? signUp,
     TResult Function(_SignOutEvent value)? signOut,
+    TResult Function(_CheckAuthenticationEvent value)? checkAuthentication,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +169,7 @@ class _$SignInEventImpl implements _SignInEvent {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() signOut,
+    required TResult Function() checkAuthentication,
   }) {
     return signIn(email, password);
   }
@@ -172,6 +180,7 @@ class _$SignInEventImpl implements _SignInEvent {
     TResult? Function(String email, String password)? signIn,
     TResult? Function(String email, String password)? signUp,
     TResult? Function()? signOut,
+    TResult? Function()? checkAuthentication,
   }) {
     return signIn?.call(email, password);
   }
@@ -182,6 +191,7 @@ class _$SignInEventImpl implements _SignInEvent {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? signOut,
+    TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -196,6 +206,8 @@ class _$SignInEventImpl implements _SignInEvent {
     required TResult Function(_SignInEvent value) signIn,
     required TResult Function(_SignUpEvent value) signUp,
     required TResult Function(_SignOutEvent value) signOut,
+    required TResult Function(_CheckAuthenticationEvent value)
+        checkAuthentication,
   }) {
     return signIn(this);
   }
@@ -206,6 +218,7 @@ class _$SignInEventImpl implements _SignInEvent {
     TResult? Function(_SignInEvent value)? signIn,
     TResult? Function(_SignUpEvent value)? signUp,
     TResult? Function(_SignOutEvent value)? signOut,
+    TResult? Function(_CheckAuthenticationEvent value)? checkAuthentication,
   }) {
     return signIn?.call(this);
   }
@@ -216,6 +229,7 @@ class _$SignInEventImpl implements _SignInEvent {
     TResult Function(_SignInEvent value)? signIn,
     TResult Function(_SignUpEvent value)? signUp,
     TResult Function(_SignOutEvent value)? signOut,
+    TResult Function(_CheckAuthenticationEvent value)? checkAuthentication,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -319,6 +333,7 @@ class _$SignUpEventImpl implements _SignUpEvent {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() signOut,
+    required TResult Function() checkAuthentication,
   }) {
     return signUp(email, password);
   }
@@ -329,6 +344,7 @@ class _$SignUpEventImpl implements _SignUpEvent {
     TResult? Function(String email, String password)? signIn,
     TResult? Function(String email, String password)? signUp,
     TResult? Function()? signOut,
+    TResult? Function()? checkAuthentication,
   }) {
     return signUp?.call(email, password);
   }
@@ -339,6 +355,7 @@ class _$SignUpEventImpl implements _SignUpEvent {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? signOut,
+    TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -353,6 +370,8 @@ class _$SignUpEventImpl implements _SignUpEvent {
     required TResult Function(_SignInEvent value) signIn,
     required TResult Function(_SignUpEvent value) signUp,
     required TResult Function(_SignOutEvent value) signOut,
+    required TResult Function(_CheckAuthenticationEvent value)
+        checkAuthentication,
   }) {
     return signUp(this);
   }
@@ -363,6 +382,7 @@ class _$SignUpEventImpl implements _SignUpEvent {
     TResult? Function(_SignInEvent value)? signIn,
     TResult? Function(_SignUpEvent value)? signUp,
     TResult? Function(_SignOutEvent value)? signOut,
+    TResult? Function(_CheckAuthenticationEvent value)? checkAuthentication,
   }) {
     return signUp?.call(this);
   }
@@ -373,6 +393,7 @@ class _$SignUpEventImpl implements _SignUpEvent {
     TResult Function(_SignInEvent value)? signIn,
     TResult Function(_SignUpEvent value)? signUp,
     TResult Function(_SignOutEvent value)? signOut,
+    TResult Function(_CheckAuthenticationEvent value)? checkAuthentication,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -440,6 +461,7 @@ class _$SignOutEventImpl implements _SignOutEvent {
     required TResult Function(String email, String password) signIn,
     required TResult Function(String email, String password) signUp,
     required TResult Function() signOut,
+    required TResult Function() checkAuthentication,
   }) {
     return signOut();
   }
@@ -450,6 +472,7 @@ class _$SignOutEventImpl implements _SignOutEvent {
     TResult? Function(String email, String password)? signIn,
     TResult? Function(String email, String password)? signUp,
     TResult? Function()? signOut,
+    TResult? Function()? checkAuthentication,
   }) {
     return signOut?.call();
   }
@@ -460,6 +483,7 @@ class _$SignOutEventImpl implements _SignOutEvent {
     TResult Function(String email, String password)? signIn,
     TResult Function(String email, String password)? signUp,
     TResult Function()? signOut,
+    TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -474,6 +498,8 @@ class _$SignOutEventImpl implements _SignOutEvent {
     required TResult Function(_SignInEvent value) signIn,
     required TResult Function(_SignUpEvent value) signUp,
     required TResult Function(_SignOutEvent value) signOut,
+    required TResult Function(_CheckAuthenticationEvent value)
+        checkAuthentication,
   }) {
     return signOut(this);
   }
@@ -484,6 +510,7 @@ class _$SignOutEventImpl implements _SignOutEvent {
     TResult? Function(_SignInEvent value)? signIn,
     TResult? Function(_SignUpEvent value)? signUp,
     TResult? Function(_SignOutEvent value)? signOut,
+    TResult? Function(_CheckAuthenticationEvent value)? checkAuthentication,
   }) {
     return signOut?.call(this);
   }
@@ -494,6 +521,7 @@ class _$SignOutEventImpl implements _SignOutEvent {
     TResult Function(_SignInEvent value)? signIn,
     TResult Function(_SignUpEvent value)? signUp,
     TResult Function(_SignOutEvent value)? signOut,
+    TResult Function(_CheckAuthenticationEvent value)? checkAuthentication,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -505,6 +533,127 @@ class _$SignOutEventImpl implements _SignOutEvent {
 
 abstract class _SignOutEvent implements AuthEvent {
   const factory _SignOutEvent() = _$SignOutEventImpl;
+}
+
+/// @nodoc
+abstract class _$$CheckAuthenticationEventImplCopyWith<$Res> {
+  factory _$$CheckAuthenticationEventImplCopyWith(
+          _$CheckAuthenticationEventImpl value,
+          $Res Function(_$CheckAuthenticationEventImpl) then) =
+      __$$CheckAuthenticationEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckAuthenticationEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$CheckAuthenticationEventImpl>
+    implements _$$CheckAuthenticationEventImplCopyWith<$Res> {
+  __$$CheckAuthenticationEventImplCopyWithImpl(
+      _$CheckAuthenticationEventImpl _value,
+      $Res Function(_$CheckAuthenticationEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CheckAuthenticationEventImpl implements _CheckAuthenticationEvent {
+  const _$CheckAuthenticationEventImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.checkAuthentication()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckAuthenticationEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signIn,
+    required TResult Function(String email, String password) signUp,
+    required TResult Function() signOut,
+    required TResult Function() checkAuthentication,
+  }) {
+    return checkAuthentication();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signIn,
+    TResult? Function(String email, String password)? signUp,
+    TResult? Function()? signOut,
+    TResult? Function()? checkAuthentication,
+  }) {
+    return checkAuthentication?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signIn,
+    TResult Function(String email, String password)? signUp,
+    TResult Function()? signOut,
+    TResult Function()? checkAuthentication,
+    required TResult orElse(),
+  }) {
+    if (checkAuthentication != null) {
+      return checkAuthentication();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignInEvent value) signIn,
+    required TResult Function(_SignUpEvent value) signUp,
+    required TResult Function(_SignOutEvent value) signOut,
+    required TResult Function(_CheckAuthenticationEvent value)
+        checkAuthentication,
+  }) {
+    return checkAuthentication(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SignInEvent value)? signIn,
+    TResult? Function(_SignUpEvent value)? signUp,
+    TResult? Function(_SignOutEvent value)? signOut,
+    TResult? Function(_CheckAuthenticationEvent value)? checkAuthentication,
+  }) {
+    return checkAuthentication?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignInEvent value)? signIn,
+    TResult Function(_SignUpEvent value)? signUp,
+    TResult Function(_SignOutEvent value)? signOut,
+    TResult Function(_CheckAuthenticationEvent value)? checkAuthentication,
+    required TResult orElse(),
+  }) {
+    if (checkAuthentication != null) {
+      return checkAuthentication(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckAuthenticationEvent implements AuthEvent {
+  const factory _CheckAuthenticationEvent() = _$CheckAuthenticationEventImpl;
 }
 
 /// @nodoc

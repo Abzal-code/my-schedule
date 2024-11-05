@@ -13,14 +13,17 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
   final SignInUseCase _signInUseCase;
   final SignUpUsecase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
 
   AuthBloc({
     required SignInUseCase signInUseCase,
     required SignUpUsecase signUpUseCase,
     required SignOutUseCase signOutUseCase,
+    required GetCurrentUserUseCase getCurrentUserUseCase,
   })  : _signInUseCase = signInUseCase,
         _signUpUseCase = signUpUseCase,
         _signOutUseCase = signOutUseCase,
+        _getCurrentUserUseCase = getCurrentUserUseCase,
         super(const AuthState.initial());
 
   @override
@@ -29,6 +32,7 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
       signIn: (e) async => await _signIn(e, emit),
       signUp: (e) async => await _signUp(e, emit),
       signOut: (e) async => await _signOut(emit),
+      checkAuthentication: (e) async => await _checkAuthentication(emit),
     );
   }
 
@@ -64,6 +68,21 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
     } catch (e) {
       emit(const AuthState.error());
       addUIAction(ShowErrorAction('Ошибка при выходе: ${e.toString()}'));
+    }
+  }
+
+   Future<void> _checkAuthentication(Emitter<AuthState> emit) async {
+    emit(const AuthState.loading());
+    try {
+      final user = await _getCurrentUserUseCase.call(const NoParams());
+      if (user != null) {
+        emit(const AuthState.authenticated());
+      } else {
+        emit(const AuthState.unauthenticated());
+      }
+    } catch (e) {
+      emit(const AuthState.error());
+      addUIAction(ShowErrorAction('Ошибка при проверке авторизации: ${e.toString()}'));
     }
   }
 }

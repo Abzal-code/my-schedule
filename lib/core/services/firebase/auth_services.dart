@@ -4,6 +4,7 @@ abstract class AuthServices {
   Future<void> signIn(String email, String password);
   Future<void> signUp(String email, String password);
   Future<void> signOut();
+  Future<User?> getCurrentUser();
 }
 
 class AuthServicesImpl extends AuthServices {
@@ -39,5 +40,11 @@ class AuthServicesImpl extends AuthServices {
   @override
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  @override
+  Future<User?> getCurrentUser() async {
+    print('AuthServicesImpl: ${_auth.currentUser}');
+    return _auth.currentUser;
   }
 }

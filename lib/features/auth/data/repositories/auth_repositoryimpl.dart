@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/core/services/firebase/auth_services.dart';
 import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
@@ -24,5 +25,10 @@ class AuthRepositoryimpl implements AuthRepository {
     String password,
   ) async {
     await _services.signUp(email, password);
+  }
+
+  @override
+  Future<User?> getCurrentUser() async {
+    return await _services.getCurrentUser();
   }
 }
