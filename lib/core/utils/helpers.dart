@@ -27,15 +27,10 @@ class StringHelper {
 class MessageHelper {
   /// Возвращает сообщение об ошибке.
   static displayError(BuildContext context, String message) {
-    AlertDialog(
-      title: const Text('Ошибка'),
-      content: Text(message),
-      actions: [
-        TextButton(
-          child: const Text('ОК'),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ],
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
     );
   }
 }

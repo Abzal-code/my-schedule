@@ -3,6 +3,7 @@ import 'package:my_shedule/core/services/firebase/auth_services.dart';
 import 'package:my_shedule/features/auth/data/repositories/auth_repositoryimpl.dart';
 import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
 import 'package:my_shedule/features/auth/domain/usecases/auth_usecases.dart';
+import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -18,4 +19,9 @@ void setupCoreLocator() {
   locator.registerFactory(() => SignUpUsecase(locator<AuthRepository>()));
 
   // Регистрация других сервисов и зависимостей можно добавить здесь
+  locator.registerFactory(() => AuthBloc(
+        signInUseCase: locator<SignInUseCase>(),
+        signOutUseCase: locator<SignOutUseCase>(),
+        signUpUseCase: locator<SignUpUsecase>(),
+      ));
 }

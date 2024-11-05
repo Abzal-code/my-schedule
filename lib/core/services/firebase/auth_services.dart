@@ -21,10 +21,19 @@ class AuthServicesImpl extends AuthServices {
 
   @override
   Future<void> signUp(String email, String password) async {
-    await _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    print('AuthServicesImpl: ${email} ${password}');
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      print('FirebaseAuthException code: ${e.code}');
+      print('FirebaseAuthException message: ${e.message}');
+      print('FirebaseAuthException details: ${e}');
+    } catch (e) {
+      print('General error: ${e.toString()}');
+    }
   }
 
   @override

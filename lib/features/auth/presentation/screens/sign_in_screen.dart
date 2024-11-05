@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_shedule/core/services/firebase/auth_services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_shedule/features/auth/presentation/screens/sign_up_screen.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
@@ -7,7 +8,6 @@ import '../widgets/custom_button.dart';
 class SignInScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final AuthServices _authServices = AuthServicesImpl();
 
   despose() {
     emailController.dispose();
@@ -43,10 +43,12 @@ class SignInScreen extends StatelessWidget {
             CustomButton(
               label: 'Sign In',
               onPressed: () {
-                _authServices.signIn(
-                  emailController.text.trim(),
-                  passwordController.text.trim(),
-                );
+                context.read<AuthBloc>().add(
+                      AuthEvent.signIn(
+                        emailController.text,
+                        passwordController.text,
+                      ),
+                    );
               },
             ),
             TextButton(
