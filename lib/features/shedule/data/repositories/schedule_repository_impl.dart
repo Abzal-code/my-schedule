@@ -3,7 +3,7 @@ import 'package:my_shedule/features/shedule/domain/repositories/schedule_reposit
 
 class ScheduleRepositoryImpl implements ScheduleRepository {
   @override
-  Future<void> addSchedule(ScheduleEntity schedule) {
+  Future<void> addSchedule(EventEntity schedule) {
     // TODO: implement addSchedule
     throw UnimplementedError();
   }
@@ -15,13 +15,13 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   }
 
   @override
-  Future<List<ScheduleEntity>> getSchedules() {
+  Future<List<EventEntity>> getSchedules() {
     // TODO: implement getSchedules
     throw UnimplementedError();
   }
 
   @override
-  Future<void> updateSchedule(ScheduleEntity schedule) {
+  Future<void> updateSchedule(EventEntity schedule) {
     // TODO: implement updateSchedule
     throw UnimplementedError();
   }
