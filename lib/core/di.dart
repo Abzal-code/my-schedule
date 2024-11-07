@@ -1,26 +1,31 @@
 import 'package:get_it/get_it.dart';
 import 'package:my_shedule/core/services/firebase/auth_services.dart';
+import 'package:my_shedule/core/services/firebase/firestore_service.dart';
 import 'package:my_shedule/features/auth/data/repositories/auth_repositoryimpl.dart';
 import 'package:my_shedule/features/auth/domain/repositories/auth_repository.dart';
 import 'package:my_shedule/features/auth/domain/usecases/auth_usecases.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_shedule/features/shedule/data/repositories/schedule_repository_impl.dart';
+import 'package:my_shedule/features/shedule/domain/repositories/schedule_repository.dart';
 
 final GetIt sl = GetIt.instance;
 
 void setupCoreLocator() {
-  // Регистрация сервисов
+  // Register services
   sl.registerLazySingleton<AuthServices>(() => AuthServicesImpl());
-  // Регистрация репозиториев
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryimpl());
+  sl.registerLazySingleton<FirestoreService>(() => FirestoreServiceImpl());
 
-  // Регистрация use cases
+  // Register repositories
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryimpl());
+  sl.registerLazySingleton<ScheduleRepository>(() => ScheduleRepositoryImpl());
+
+  // Register use cases
   sl.registerFactory(() => SignInUseCase(sl<AuthRepository>()));
   sl.registerFactory(() => SignOutUseCase(sl<AuthRepository>()));
   sl.registerFactory(() => SignUpUsecase(sl<AuthRepository>()));
-  sl
-      .registerFactory(() => GetCurrentUserUseCase(sl<AuthRepository>()));
+  sl.registerFactory(() => GetCurrentUserUseCase(sl<AuthRepository>()));
 
-  // Регистрация других сервисов и зависимостей можно добавить здесь
+  // Register bloc
   sl.registerFactory(() => AuthBloc(
         signInUseCase: sl<SignInUseCase>(),
         signOutUseCase: sl<SignOutUseCase>(),

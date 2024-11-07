@@ -1,8 +1,8 @@
-import 'package:my_shedule/features/shedule/domain/entities/schedule_entity.dart';
+import 'package:my_shedule/features/shedule/domain/entities/event_entity.dart';
 
 abstract class ScheduleRepository {
-  Future<void> addSchedule(EventEntity schedule);
-  Future<List<EventEntity>> getSchedules();
-  Future<void> deleteSchedule(String id);
-  Future<void> updateSchedule(EventEntity schedule);
+  Future<void> addEvent(EventEntity schedule);
+  Stream<List<EventEntity>> getEvents();
+  Future<void> deleteEvent(String id);
+  Future<void> updateEvent(EventEntity schedule);
 }

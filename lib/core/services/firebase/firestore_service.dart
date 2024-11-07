@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:my_shedule/features/shedule/domain/entities/schedule_entity.dart';
+import 'package:my_shedule/features/shedule/domain/entities/event_entity.dart';
 
-abstract class StorageService {
+abstract class FirestoreService {
   Stream<List<EventEntity>> getEvents();
   Future<void> addEvent(EventEntity event);
   Future<void> updateEvent(EventEntity event);
   Future<void> deleteEvent(String id);
 }
 
-class FirestoreService extends StorageService {
-  FirestoreService();
+class FirestoreServiceImpl extends FirestoreService {
+  FirestoreServiceImpl();
 
   final CollectionReference  _events = FirebaseFirestore.instance.collection('events');
   
@@ -24,7 +24,7 @@ class FirestoreService extends StorageService {
   }
   
   @override
-  Stream<List<EventEntity>> getEvents() {
+  Stream<List<EventEntity>> getEvents()  {
     return _events.snapshots().map((snapshot) => snapshot.docs.map((doc) => EventEntity.fromDocument(doc)).toList());
   }
   

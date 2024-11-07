@@ -41,6 +41,7 @@ class AppStarter extends StatelessWidget {
         final appRouter = AppRouter(authChangeNotifier);
 
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routeInformationParser: appRouter.router.routeInformationParser,
           routerDelegate: appRouter.router.routerDelegate,
           routeInformationProvider: appRouter.router.routeInformationProvider,

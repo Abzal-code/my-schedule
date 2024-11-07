@@ -1,28 +1,28 @@
-import 'package:my_shedule/features/shedule/domain/entities/schedule_entity.dart';
+import 'package:my_shedule/core/di.dart';
+import 'package:my_shedule/core/services/firebase/firestore_service.dart';
+import 'package:my_shedule/features/shedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/shedule/domain/repositories/schedule_repository.dart';
 
 class ScheduleRepositoryImpl implements ScheduleRepository {
+  final FirestoreService _storageService = sl<FirestoreService>();
+
   @override
-  Future<void> addSchedule(EventEntity schedule) {
-    // TODO: implement addSchedule
-    throw UnimplementedError();
+  Future<void> addEvent(EventEntity schedule) async {
+    await _storageService.addEvent(schedule);
   }
 
   @override
-  Future<void> deleteSchedule(String id) {
-    // TODO: implement deleteSchedule
-    throw UnimplementedError();
+  Future<void> deleteEvent(String id) async {
+    await _storageService.deleteEvent(id);
   }
 
   @override
-  Future<List<EventEntity>> getSchedules() {
-    // TODO: implement getSchedules
-    throw UnimplementedError();
+  Stream<List<EventEntity>> getEvents() {
+    return _storageService.getEvents();
   }
 
   @override
-  Future<void> updateSchedule(EventEntity schedule) {
-    // TODO: implement updateSchedule
-    throw UnimplementedError();
+  Future<void> updateEvent(EventEntity schedule) {
+    return _storageService.updateEvent(schedule);
   }
 }
