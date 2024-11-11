@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:my_shedule/features/shedule/presentation/widgets/calendar_widget.dart';
 
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
@@ -11,7 +11,9 @@ class ScheduleScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blue[800],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          print('object');
+        },
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
@@ -29,39 +31,110 @@ class ScheduleScreen extends StatelessWidget {
           )
         ],
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+          padding: EdgeInsets.all(16.0),
+          child: Stack(
+            children: [
+              CalendarWidget(),
+              SizedBox(
+                height: 20,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TableCalendar(
-                  rowHeight: 45,
-                  onFormatChanged: (format) => print(format),
-                  availableCalendarFormats: const {
-                    CalendarFormat.month: 'Month',
-                    CalendarFormat.twoWeeks: '2 weeks',
-                    CalendarFormat.week: 'Week'
+              EventsListWidget(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class EventsListWidget extends StatefulWidget {
+  const EventsListWidget({super.key});
+
+  @override
+  State<EventsListWidget> createState() => _EventsListWidgetState();
+}
+
+class _EventsListWidgetState extends State<EventsListWidget> {
+  double _sheetPosition = 0.5;
+  final double _dragSensitivity = 600;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return DraggableScrollableSheet(
+      initialChildSize: _sheetPosition,
+      builder: (BuildContext context, ScrollController scrollController) {
+        return ColoredBox(
+          color: colorScheme.secondary,
+          child: Column(
+            children: <Widget>[
+              Grabber(
+                onVerticalDragUpdate: (DragUpdateDetails details) {
+                  setState(() {
+                    _sheetPosition -= details.delta.dy / _dragSensitivity;
+                    if (_sheetPosition < 0.25) {
+                      _sheetPosition = 0.25;
+                    }
+                    if (_sheetPosition > 1.0) {
+                      _sheetPosition = 1.0;
+                    }
+                  });
+                },
+              ),
+              Flexible(
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: 25,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(
+                        'Item $index',
+                        style: TextStyle(color: colorScheme.surface),
+                      ),
+                    );
                   },
-                  startingDayOfWeek: StartingDayOfWeek.monday,
-                  // calendarStyle: const CalendarStyle(
-                  //   outsideTextStyle: TextStyle(
-                  //     color: Colors.white,
-                  //   ),
-                  //   weekendTextStyle: TextStyle(
-                  //     color: Colors.amber,
-                  //   ),
-                  // ),
-                  firstDay: DateTime.utc(2010, 10, 16),
-                  lastDay: DateTime.utc(2030, 3, 14),
-                  focusedDay: DateTime.now(),
                 ),
               ),
-            )),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class Grabber extends StatelessWidget {
+  const Grabber({
+    super.key,
+    required this.onVerticalDragUpdate,
+  });
+
+  final ValueChanged<DragUpdateDetails> onVerticalDragUpdate;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return GestureDetector(
+      onVerticalDragUpdate: onVerticalDragUpdate,
+      child: Container(
+        width: double.infinity,
+        color: colorScheme.onSurface,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            width: 32.0,
+            height: 4.0,
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+        ),
       ),
     );
   }
