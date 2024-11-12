@@ -1,7 +1,7 @@
 import 'package:my_shedule/core/di.dart';
-import 'package:my_shedule/core/services/firebase/firestore_service.dart';
-import 'package:my_shedule/features/shedule/domain/entities/event_entity.dart';
-import 'package:my_shedule/features/shedule/domain/repositories/schedule_repository.dart';
+import 'package:my_shedule/core/services/firestore/firestore_service.dart';
+import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
+import 'package:my_shedule/features/schedule/domain/repositories/schedule_repository.dart';
 
 class ScheduleRepositoryImpl implements ScheduleRepository {
   final FirestoreService _storageService = sl<FirestoreService>();

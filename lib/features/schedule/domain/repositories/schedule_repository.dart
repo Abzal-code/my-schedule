@@ -1,4 +1,4 @@
-import 'package:my_shedule/features/shedule/domain/entities/event_entity.dart';
+import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 
 abstract class ScheduleRepository {
   Future<void> addEvent(EventEntity schedule);

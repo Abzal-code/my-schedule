@@ -75,11 +75,9 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
     await Future.delayed(const Duration(seconds: 2));
     try {
       final user = await _getCurrentUserUseCase.call(const NoParams());
-      if (user != null) {
-        emit(const AuthState.authenticated());
-      } else {
-        emit(const AuthState.unauthenticated());
-      }
+      user != null
+          ? emit(const AuthState.authenticated())
+          : emit(const AuthState.unauthenticated());
     } catch (e) {
       emit(const AuthState.error());
       addUIAction(
