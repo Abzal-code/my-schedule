@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-enum CalendarView { week, twoWeek, month }
-
 class CalendarWidget extends StatefulWidget {
+  final ValueChanged<DateTime> onDataChanged;
+
   const CalendarWidget({
     super.key,
+    required this.onDataChanged,
   });
 
   @override
@@ -17,17 +18,17 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   DateTime? _selectedDate;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   final DaysOfWeekStyle _styleOfWeek = const DaysOfWeekStyle(
-    weekdayStyle: TextStyle(color: Colors.green),
-    weekendStyle: TextStyle(color: Colors.red),
+    weekdayStyle: TextStyle(color: Colors.white60),
+    weekendStyle: TextStyle(color: Colors.white30),
   );
   final CalendarStyle _calendarStyle = CalendarStyle(
     selectedDecoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.blue[200],
+      color: Colors.white.withOpacity(0.5),
     ),
-    todayDecoration: const BoxDecoration(
+    todayDecoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.blue,
+      color: Colors.white.withOpacity(0.2),
     ),
   );
 
@@ -35,37 +36,35 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(20.0),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TableCalendar(
-          calendarFormat: _calendarFormat,
-          daysOfWeekHeight: 46,
-          rowHeight: 40,
-          onFormatChanged: _onformatChanged,
-          daysOfWeekStyle: _styleOfWeek,
-          startingDayOfWeek: StartingDayOfWeek.monday,
-          calendarStyle: _calendarStyle,
-          firstDay: DateTime.utc(2010, 10, 16),
-          lastDay: DateTime.utc(2030, 3, 14),
-          focusedDay: _focusedDate,
-          selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
-          onDaySelected: _onDateSelected,
-        ),
+      alignment: Alignment.center,
+      child: TableCalendar(
+        calendarFormat: _calendarFormat,
+        daysOfWeekHeight: 46,
+        rowHeight: 40,
+        onFormatChanged: _onformatChanged,
+        daysOfWeekStyle: _styleOfWeek,
+        startingDayOfWeek: StartingDayOfWeek.monday,
+        calendarStyle: _calendarStyle,
+        firstDay: DateTime.utc(2010, 10, 16),
+        lastDay: DateTime.utc(2030, 3, 14),
+        focusedDay: _focusedDate,
+        selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
+        onDaySelected: _onDateSelected,
       ),
     );
   }
 
   _onDateSelected(selectedDate, focusedDate) {
-    print('selectedDay $selectedDate');
     if (!isSameDay(_selectedDate, selectedDate)) {
       setState(() {
         _selectedDate = selectedDate;
         _focusedDate = focusedDate;
       });
-    } else {}
+      widget.onDataChanged(selectedDate);
+    }
   }
 
   _onformatChanged(CalendarFormat format) {

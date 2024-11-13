@@ -6,11 +6,27 @@ class DateHelper {
   /// Форматирует дату в строку по указанному шаблону.
   static String formatDate(
     DateTime date, {
-    String format = 'yyyy-MM-dd',
+    String format = 'dd.MM.yyyy',
   }) {
     // Используем пакет intl для форматирования дат.
-    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year.toString().padLeft(4, '0')}';
   }
+
+  /// Форматирует дату в строку по указанному шаблону.
+  static String formatTime(
+    DateTime date, {
+    String format = 'HH:mm:ss',
+  }) {
+    // Используем пакет intl для форматирования дат.
+    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}:${date.second.toString().padLeft(2, '0')}';
+  }
+
+  /// Форматирует дату в строку по указанному шаблону.
+  static String formatDateTime(
+    DateTime date, {
+    String format = 'dd/MM/yyyy HH:mm:ss',
+  }) =>
+      '${formatDate(date, format: format)} ${formatTime(date, format: format)}';
 }
 
 class StringHelper {

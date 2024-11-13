@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
@@ -5,13 +7,19 @@ import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
-  SignUpScreen({super.key});
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   despose() {
     emailController.dispose();
@@ -25,52 +33,57 @@ class SignUpScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Sign Up')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomTextField(
-              controller: emailController,
-              hintText: 'Email',
-              icon: Icons.email,
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 16),
-            CustomTextField(
-              controller: passwordController,
-              hintText: 'Password',
-              icon: Icons.lock,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-            ),
-            const SizedBox(height: 16),
-            CustomTextField(
-              controller: confirmPasswordController,
-              hintText: 'Confirm Password',
-              icon: Icons.lock,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-            ),
-            const SizedBox(height: 32),
-            CustomButton(
-              label: 'Sign Up',
-              onPressed: () {
-                if (passwordController.text.trim() ==
-                    confirmPasswordController.text.trim()) {
-                  context.read<AuthBloc>().add(
-                        AuthEvent.signUp(
-                          emailController.text,
-                          passwordController.text,
-                        ),
-                      );
-                } else {
-                  // Handle password mismatch
-                  MessageHelper.displayError(context, 'Password mismatch');
-                }
-              },
-            ),
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomTextField(
+                controller: emailController,
+                label: 'Email',
+                icon: Icons.email,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                controller: passwordController,
+                label: 'Password',
+                icon: Icons.lock,
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                controller: confirmPasswordController,
+                label: 'Confirm Password',
+                icon: Icons.lock,
+                obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+              const SizedBox(height: 32),
+              CustomButton(
+                label: 'Sign Up',
+                onPressed: () => _signUp(),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void _signUp() {
+    if (_formKey.currentState!.validate() &&
+        passwordController.text.trim() ==
+            confirmPasswordController.text.trim()) {
+      context.read<AuthBloc>().add(
+            AuthEvent.signUp(
+              emailController.text,
+              passwordController.text,
+            ),
+          );
+    } else {
+      MessageHelper.displayError(context, 'Password mismatch');
+    }
   }
 }

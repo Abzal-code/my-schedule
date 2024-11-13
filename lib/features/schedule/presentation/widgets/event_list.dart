@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 
 class EventsList extends StatelessWidget {
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
   final List<EventEntity> events;
 
   const EventsList({
     super.key,
-    required this.scrollController,
+     this.scrollController,
     required this.events,
   });
 
@@ -18,11 +18,14 @@ class EventsList extends StatelessWidget {
       controller: scrollController,
       itemCount: events.length,
       itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text(
-            'Item $index',
-            style: TextStyle(color: colorScheme.surface),
+        return GestureDetector(
+          child: ListTile(
+            title: Text(
+              events[index].title,
+              style: TextStyle(color: colorScheme.surface),
+            ),
           ),
+          onTap: () => print(events[index].id),
         );
       },
     );

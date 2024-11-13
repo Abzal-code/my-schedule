@@ -22,8 +22,12 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
     return DraggableScrollableSheet(
       initialChildSize: _sheetPosition,
       builder: (BuildContext context, ScrollController scrollController) {
-        return ColoredBox(
-          color: colorScheme.secondary,
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          alignment: Alignment.center,
           child: Column(
             children: <Widget>[
               Grabber(

@@ -16,7 +16,7 @@ class Grabber extends StatelessWidget {
       onVerticalDragUpdate: onVerticalDragUpdate,
       child: Container(
         width: double.infinity,
-        color: colorScheme.onSurface,
+        color: Colors.transparent,
         child: Align(
           alignment: Alignment.topCenter,
           child: Container(

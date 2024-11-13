@@ -2,28 +2,28 @@ import 'package:equatable/equatable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventEntity extends Equatable {
-  final String? id;
-  final String? name;
+  final String id;
+  final String title;
   final String? description;
   final String? img;
-  final DateTime? startDate;
-  final DateTime? endDate;
-  final bool? isCompleted;
+  final DateTime startDate;
+  final DateTime endDate;
+  final bool isCompleted;
 
   const EventEntity({
-    this.id,
-    this.name,
+    required this.id,
+    required this.title,
     this.description,
     this.img,
-    this.startDate,
-    this.endDate,
-    this.isCompleted,
+    required this.startDate,
+    required this.endDate,
+    required this.isCompleted,
   });
 
   factory EventEntity.fromDocument(DocumentSnapshot doc) {
     return EventEntity(
       id: doc.id,
-      name: doc['name'],
+      title: doc['title'],
       description: doc['description'],
       img: doc['img'],
       startDate: doc['startDate'],
@@ -35,7 +35,7 @@ class EventEntity extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
+      'title': title,
       'description': description,
       'img': img,
       'startDate': startDate,
@@ -46,7 +46,7 @@ class EventEntity extends Equatable {
 
   EventEntity copyWith({
     String? id,
-    String? name,
+    String? title,
     String? description,
     String? img,
     DateTime? dateTime,
@@ -56,7 +56,7 @@ class EventEntity extends Equatable {
   }) {
     return EventEntity(
       id: id ?? this.id,
-      name: name ?? this.name,
+      title: title ?? this.title,
       description: description ?? this.description,
       img: img ?? this.img,
       startDate: startDate ?? this.startDate,
@@ -68,7 +68,7 @@ class EventEntity extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        name,
+        title,
         description,
         img,
         startDate,

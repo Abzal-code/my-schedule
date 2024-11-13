@@ -4,7 +4,6 @@ import 'package:my_shedule/core/router/auth_change_notifier.dart';
 import 'package:my_shedule/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:my_shedule/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:my_shedule/features/auth/presentation/screens/splash_screen.dart';
-import 'package:my_shedule/features/schedule/presentation/pages/create_event_screen.dart';
 import 'package:my_shedule/features/schedule/presentation/pages/schedule_screen.dart';
 
 class Routes {
@@ -12,7 +11,6 @@ class Routes {
   static const String signIn = '/signIn';
   static const String signUp = '/signUp';
   static const String schedule = '/schedule';
-  static const String createEvent = '/create_event';
   static const String error = '/error';
 }
 
@@ -70,13 +68,6 @@ class AppRouter {
         path: Routes.schedule,
         name: 'schedule',
         builder: (context, state) => const ScheduleScreen(),
-        routes: [
-          GoRoute(
-            path: Routes.createEvent,
-            name: 'create_event',
-            builder: (context, state) => const CreateEventScreen(),
-          ),
-        ],
       ),
     ],
   );

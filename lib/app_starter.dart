@@ -23,7 +23,7 @@ class AppStarter extends StatelessWidget {
             routeInformationParser: appRouter.router.routeInformationParser,
             routerDelegate: appRouter.router.routerDelegate,
             routeInformationProvider: appRouter.router.routeInformationProvider,
-            theme: ThemeData(),
+            theme: ThemeData(scaffoldBackgroundColor: Colors.transparent),
           );
         },
       ),
