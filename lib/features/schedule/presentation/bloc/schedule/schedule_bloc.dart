@@ -39,6 +39,7 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
 
   Future<void> _loadEvents(
       _LoadEvents event, Emitter<ScheduleState> emit) async {
+    print('start bloc load');
     emit(const ScheduleState.loading());
     await emit.forEach<List<EventEntity>>(
       _loadEventsUseCase.call(const NoParams()),
@@ -47,12 +48,16 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
           : ScheduleState.loaded(events),
       onError: (e, stackTrace) => ScheduleState.error(e.toString()),
     );
+
+    print('start load event: }');
   }
 
   Future<void> _createEvent(
       _AddEvent event, Emitter<ScheduleState> emit) async {
+    print('start bloc create');
     try {
       emit(const ScheduleState.loading());
+      print('start create event: ${event.event.toMap()}');
       await _createEventUseCase.call(event.event);
       emit(const ScheduleState.updated());
     } catch (e) {

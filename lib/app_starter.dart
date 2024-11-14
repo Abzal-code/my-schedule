@@ -7,11 +7,21 @@ class AppStarter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthBloc>(
-      create: (context) => sl<AuthBloc>()
-        ..add(
-          const AuthEvent.checkAuthentication(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => sl<AuthBloc>()
+            ..add(
+              const AuthEvent.checkAuthentication(),
+            ),
         ),
+        BlocProvider(
+          create: (context) => sl<ScheduleBloc>()
+            ..add(
+              const ScheduleEvent.loadEvents(),
+            ),
+        ),
+      ],
       child: Builder(
         builder: (context) {
           final authBloc = context.read<AuthBloc>();

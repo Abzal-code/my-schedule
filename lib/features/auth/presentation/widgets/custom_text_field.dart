@@ -58,7 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       readOnly: widget.readOnly ?? false,
       onTap: widget.onTap,
-      maxLines: widget.maxLines,
+      maxLines: widget.maxLines ?? 1,
     );
   }
 }

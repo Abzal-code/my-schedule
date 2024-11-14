@@ -6,6 +6,7 @@ import 'package:my_shedule/core/router/app_router.dart';
 import 'package:my_shedule/core/router/auth_change_notifier.dart';
 import 'package:my_shedule/core/services/firebase_options.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
 
 part 'app_starter.dart';
 

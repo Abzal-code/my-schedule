@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
-import 'package:my_shedule/features/schedule/presentation/pages/create_event_screen.dart';
+import 'package:my_shedule/features/schedule/presentation/widgets/create_event_dialog.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/animated_background.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/calendar_widget.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/events_info_window.dart';
@@ -87,26 +87,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 void openDialog(BuildContext context, DateTime eventDate) {
   showDialog<void>(
     context: context,
-    builder: (BuildContext context) => AlertDialog(
-      title: Text(
-        'Create Event',
-        style: Theme.of(context).textTheme.titleLarge,
-        textAlign: TextAlign.center,
-      ),
-      content: CreateEventScreen(
-        selectedDate: eventDate,
-      ),
-      // actions: <Widget>[
-      //   TextButton(
-      //     style: TextButton.styleFrom(
-      //       textStyle: Theme.of(context).textTheme.labelLarge,
-      //     ),
-      //     child: const Text('Accept'),
-      //     onPressed: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //   ),
-      // ],
+    builder: (BuildContext context) => BlocProvider.value(
+      value: context.read<ScheduleBloc>(),
+      child: CreateEventDialog(selectedDate: eventDate),
     ),
   );
 }

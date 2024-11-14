@@ -1,45 +1,41 @@
-import 'package:equatable/equatable.dart';
+import 'package:equatable/equatable.dart'; 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventEntity extends Equatable {
-  final String id;
+  final String? id;
   final String title;
   final String? description;
   final String? img;
-  final DateTime startDate;
-  final DateTime endDate;
+  final DateTime eventDate;
   final bool isCompleted;
 
   const EventEntity({
-    required this.id,
+    this.id,
     required this.title,
     this.description,
     this.img,
-    required this.startDate,
-    required this.endDate,
-    required this.isCompleted,
+    required this.eventDate,
+    this.isCompleted = false,
   });
 
   factory EventEntity.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return EventEntity(
       id: doc.id,
-      title: doc['title'],
-      description: doc['description'],
-      img: doc['img'],
-      startDate: doc['startDate'],
-      endDate: doc['endDate'],
-      isCompleted: doc['isCompleted'],
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
+      img: data['img'] ?? '',
+      eventDate: (data['eventDate'] as Timestamp).toDate(),
+      isCompleted: data['isCompleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'title': title,
       'description': description,
       'img': img,
-      'startDate': startDate,
-      'endDate': endDate,
+      'eventDate': Timestamp.fromDate(eventDate),
       'isCompleted': isCompleted,
     };
   }
@@ -49,9 +45,7 @@ class EventEntity extends Equatable {
     String? title,
     String? description,
     String? img,
-    DateTime? dateTime,
-    DateTime? startDate,
-    DateTime? endDate,
+    DateTime? eventDate,
     bool? isCompleted,
   }) {
     return EventEntity(
@@ -59,8 +53,7 @@ class EventEntity extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       img: img ?? this.img,
-      startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
+      eventDate: eventDate ?? this.eventDate,
       isCompleted: isCompleted ?? this.isCompleted,
     );
   }
@@ -71,8 +64,7 @@ class EventEntity extends Equatable {
         title,
         description,
         img,
-        startDate,
-        endDate,
+        eventDate,
         isCompleted,
       ];
 }

@@ -7,7 +7,7 @@ class EventsList extends StatelessWidget {
 
   const EventsList({
     super.key,
-     this.scrollController,
+    this.scrollController,
     required this.events,
   });
 
@@ -20,12 +20,18 @@ class EventsList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           child: ListTile(
+            leading: const Icon(Icons.event),
             title: Text(
               events[index].title,
               style: TextStyle(color: colorScheme.surface),
             ),
+            subtitle: Text(events[index].description ?? '',
+                style: TextStyle(color: colorScheme.surface)),
+            trailing: events[index].isCompleted
+                ? const Icon(Icons.check)
+                : const Icon(Icons.radio_button_unchecked_outlined),
           ),
-          onTap: () => print(events[index].id),
+          onTap: () => print(events[index].toMap()),
         );
       },
     );
