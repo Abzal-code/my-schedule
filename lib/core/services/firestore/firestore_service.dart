@@ -62,9 +62,11 @@ class FirestoreServiceImpl extends FirestoreService {
   Stream<List<EventEntity>> getEvents() {
     print('Start getting events from service');
     return _eventsCollection.snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return EventEntity.fromDocument(doc);
-      }).toList();
+      return snapshot.docs
+          .map(
+            (doc) => EventEntity.fromDocument(doc),
+          )
+          .toList();
     });
   }
 }

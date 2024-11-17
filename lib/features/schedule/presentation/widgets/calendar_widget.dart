@@ -39,7 +39,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         color: Colors.white.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20.0),
       ),
-      alignment: Alignment.center,
       child: TableCalendar(
         calendarFormat: _calendarFormat,
         daysOfWeekHeight: 46,

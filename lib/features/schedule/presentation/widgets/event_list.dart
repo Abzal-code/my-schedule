@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
+import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
+import 'package:my_shedule/features/schedule/presentation/pages/schedule_screen.dart';
 
 class EventsList extends StatelessWidget {
   final ScrollController? scrollController;
@@ -23,15 +26,32 @@ class EventsList extends StatelessWidget {
             leading: const Icon(Icons.event),
             title: Text(
               events[index].title,
-              style: TextStyle(color: colorScheme.surface),
+              style: const TextStyle(color: Colors.blue),
             ),
             subtitle: Text(events[index].description ?? '',
                 style: TextStyle(color: colorScheme.surface)),
-            trailing: events[index].isCompleted
-                ? const Icon(Icons.check)
-                : const Icon(Icons.radio_button_unchecked_outlined),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () => openDialog(context, events[index].eventDate,
+                      event: events[index]),
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                ),
+                IconButton(
+                    onPressed: () => sl<ScheduleBloc>().add(
+                          ScheduleEvent.deleteEvent(
+                            events[index],
+                          ),
+                        ),
+                    icon: const Icon(Icons.delete, color: Colors.red)),
+              ],
+            ),
+            onTap: () => print(events[index].id),
           ),
-          onTap: () => print(events[index].toMap()),
         );
       },
     );

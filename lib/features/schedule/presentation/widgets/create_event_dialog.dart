@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/auth/presentation/widgets/custom_text_field.dart';
@@ -8,7 +7,8 @@ import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule
 
 class CreateEventDialog extends StatefulWidget {
   final DateTime selectedDate;
-  const CreateEventDialog({super.key, required this.selectedDate});
+  final EventEntity? event;
+  const CreateEventDialog({super.key, required this.selectedDate, this.event});
 
   @override
   State<CreateEventDialog> createState() => _CreateEventDialogState();
@@ -16,13 +16,15 @@ class CreateEventDialog extends StatefulWidget {
 
 class _CreateEventDialogState extends State<CreateEventDialog> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _selectedDateController = TextEditingController();
 
   @override
   void initState() {
     _selectedDateController.text = DateHelper.formatDate(widget.selectedDate);
+    _titleController.text = widget.event?.title ?? '';
+    _descriptionController.text = widget.event?.description ?? '';
     super.initState();
   }
 
@@ -42,13 +44,13 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
               CustomTextField(
                 icon: Icons.title,
                 label: 'Title',
-                controller: titleController,
+                controller: _titleController,
               ),
               const SizedBox(height: 32),
               CustomTextField(
                 icon: Icons.description,
                 label: 'Description',
-                controller: descriptionController,
+                controller: _descriptionController,
                 maxLines: 3,
               ),
               const SizedBox(height: 32),
@@ -77,15 +79,19 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
   void _createEvent() {
     if (_formKey.currentState!.validate()) {
       EventEntity event = EventEntity(
-        title: titleController.text,
-        description: descriptionController.text,
+        title: _titleController.text,
+        id: widget.event?.id,
+        description: _descriptionController.text,
         eventDate: widget.selectedDate,
         isCompleted: false,
       );
-      print('start _create event from dialog: ${event.toMap()}');
-      sl<ScheduleBloc>().add(
-        ScheduleEvent.addEvent(event),
-      );
+      widget.event == null
+          ? sl<ScheduleBloc>().add(
+              ScheduleEvent.addEvent(event),
+            )
+          : sl<ScheduleBloc>().add(
+              ScheduleEvent.updateEvent(event),
+            );
       Navigator.of(context).pop();
     }
   }
