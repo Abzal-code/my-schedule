@@ -6,6 +6,7 @@ abstract class FirestoreService {
   Future<EventEntity> addEvent(EventEntity event);
   Future<void> updateEvent(EventEntity event);
   Future<void> deleteEvent(String id);
+  Stream<List<EventEntity>> getEventsByDate(DateTime date);
 }
 
 class FirestoreServiceImpl extends FirestoreService {
@@ -68,5 +69,18 @@ class FirestoreServiceImpl extends FirestoreService {
           )
           .toList();
     });
+  }
+
+  @override
+  Stream<List<EventEntity>> getEventsByDate(DateTime date) {
+    print('Start getting events by date from service');
+    return _eventsCollection
+        .where('eventDate', isEqualTo: date)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map(
+              (doc) => EventEntity.fromDocument(doc),
+            )
+            .toList());
   }
 }

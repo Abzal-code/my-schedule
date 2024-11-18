@@ -15,44 +15,89 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
   final CreateEventUseCase _createEventUseCase;
   final UpdateEventUseCase _updateEventUseCase;
   final DeleteEventUseCase _deleteEventUseCase;
+  final GetEventsByDateUseCase _getEventsByDateUseCase;
   ScheduleBloc({
     required LoadEventsUseCase loadEventsUseCase,
     required CreateEventUseCase createEventUseCase,
     required UpdateEventUseCase updateEventUseCase,
     required DeleteEventUseCase deleteEventUseCase,
+    required GetEventsByDateUseCase getEventsByDateUseCase,
   })  : _loadEventsUseCase = loadEventsUseCase,
         _createEventUseCase = createEventUseCase,
         _updateEventUseCase = updateEventUseCase,
         _deleteEventUseCase = deleteEventUseCase,
+        _getEventsByDateUseCase = getEventsByDateUseCase,
         super(const ScheduleState.initial());
 
   @override
   Future<void> onEventHandler(
-      ScheduleEvent event, Emitter<ScheduleState> emit) {
+    ScheduleEvent event,
+    Emitter<ScheduleState> emit,
+  ) {
     return event.map(
       loadEvents: (e) async => await _loadEvents(e, emit),
       addEvent: (e) async => await _createEvent(e, emit),
       updateEvent: (e) async => await _updateEvent(e, emit),
       deleteEvent: (e) async => await _deleteEvent(e, emit),
+      getEventsByDate: (e) async => await _getEventsByDate(e, emit),
     );
   }
 
   Future<void> _loadEvents(
-      _LoadEvents event, Emitter<ScheduleState> emit) async {
+    _LoadEvents event,
+    Emitter<ScheduleState> emit,
+  ) async {
     emit(const ScheduleState.loading());
-    await emit.forEach<List<EventEntity>>(
-      _loadEventsUseCase.call(const NoParams()),
-      onData: (events) => events.isEmpty
-          ? const ScheduleState.empty()
-          : ScheduleState.loaded(events),
-      onError: (e, stackTrace) => ScheduleState.error(e.toString()),
-    );
+
+    try {
+      await _emitLoadedEvents(emit);
+    } catch (e) {
+      emit(ScheduleState.error(e.toString()));
+    }
+  }
+
+  Future<void> _emitLoadedEvents(Emitter<ScheduleState> emit) async {
+    emit(const ScheduleState.loading());
+    try {
+      await emit.forEach<List<EventEntity>>(
+        _loadEventsUseCase.call(const NoParams()),
+        onData: _mapEventsToState,
+      );
+    } catch (e) {
+      emit(ScheduleState.error(e.toString()));
+    }
+  }
+
+  ScheduleState _mapEventsToState(List<EventEntity> events) {
+    if (events.isEmpty) {
+      return const ScheduleState.empty();
+    } else {
+      return ScheduleState.loaded(events);
+    }
+  }
+
+  Future<void> _getEventsByDate(
+    _GetEventsByDate event,
+    Emitter<ScheduleState> emit,
+  ) async {
+    emit(const ScheduleState.loading());
+
+    try {
+      await emit.forEach<List<EventEntity>>(
+        _getEventsByDateUseCase.call(event.date),
+        onData: _mapEventsToState,
+      );
+    } catch (e) {
+      emit(ScheduleState.error(e.toString()));
+    }
   }
 
   Future<void> _createEvent(
-      _AddEvent event, Emitter<ScheduleState> emit) async {
+    _AddEvent event,
+    Emitter<ScheduleState> emit,
+  ) async {
+    emit(const ScheduleState.loading());
     try {
-      emit(const ScheduleState.loading());
       await _createEventUseCase.call(event.event);
       emit(const ScheduleState.updated());
     } catch (e) {
@@ -61,9 +106,11 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
   }
 
   Future<void> _updateEvent(
-      _UpdateEvent event, Emitter<ScheduleState> emit) async {
+    _UpdateEvent event,
+    Emitter<ScheduleState> emit,
+  ) async {
+    emit(const ScheduleState.loading());
     try {
-      emit(const ScheduleState.loading());
       await _updateEventUseCase.call(event.event);
       emit(const ScheduleState.updated());
     } catch (e) {
@@ -72,9 +119,11 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
   }
 
   Future<void> _deleteEvent(
-      _DeleteEvent event, Emitter<ScheduleState> emit) async {
+    _DeleteEvent event,
+    Emitter<ScheduleState> emit,
+  ) async {
+    emit(const ScheduleState.loading());
     try {
-      emit(const ScheduleState.loading());
       await _deleteEventUseCase.call(event.event.id!);
       emit(const ScheduleState.updated());
     } catch (e) {

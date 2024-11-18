@@ -1,5 +1,6 @@
-import 'package:equatable/equatable.dart'; 
+import 'package:equatable/equatable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class EventEntity extends Equatable {
   final String? id;
@@ -7,6 +8,7 @@ class EventEntity extends Equatable {
   final String? description;
   final String? img;
   final DateTime eventDate;
+  final TimeOfDay eventTime;
   final bool isCompleted;
 
   const EventEntity({
@@ -15,6 +17,7 @@ class EventEntity extends Equatable {
     this.description,
     this.img,
     required this.eventDate,
+    required this.eventTime,
     this.isCompleted = false,
   });
 
@@ -26,6 +29,8 @@ class EventEntity extends Equatable {
       description: data['description'] ?? '',
       img: data['img'] ?? '',
       eventDate: (data['eventDate'] as Timestamp).toDate(),
+      eventTime:
+          TimeOfDay.fromDateTime((data['eventDate'] as Timestamp).toDate()),
       isCompleted: data['isCompleted'] ?? false,
     );
   }
@@ -36,6 +41,7 @@ class EventEntity extends Equatable {
       'description': description,
       'img': img,
       'eventDate': Timestamp.fromDate(eventDate),
+      'eventTime': eventTime,
       'isCompleted': isCompleted,
     };
   }
@@ -46,6 +52,7 @@ class EventEntity extends Equatable {
     String? description,
     String? img,
     DateTime? eventDate,
+    TimeOfDay? eventTime,
     bool? isCompleted,
   }) {
     return EventEntity(
@@ -54,6 +61,7 @@ class EventEntity extends Equatable {
       description: description ?? this.description,
       img: img ?? this.img,
       eventDate: eventDate ?? this.eventDate,
+      eventTime: eventTime ?? this.eventTime,
       isCompleted: isCompleted ?? this.isCompleted,
     );
   }
@@ -65,6 +73,7 @@ class EventEntity extends Equatable {
         description,
         img,
         eventDate,
+        eventTime,
         isCompleted,
       ];
 }

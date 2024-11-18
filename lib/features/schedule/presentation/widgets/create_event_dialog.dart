@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shedule/core/di.dart';
+import 'package:my_shedule/core/utils/extensions.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
@@ -19,6 +20,8 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _selectedDateController = TextEditingController();
+  final TextEditingController _selectedTimeController = TextEditingController();
+  TimeOfDay picked = TimeOfDay.now();
 
   @override
   void initState() {
@@ -26,6 +29,15 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
     _titleController.text = widget.event?.title ?? '';
     _descriptionController.text = widget.event?.description ?? '';
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _selectedDateController.dispose();
+    _selectedTimeController.dispose();
+    super.dispose();
   }
 
   @override
@@ -60,6 +72,13 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
                 controller: _selectedDateController,
                 readOnly: true,
               ),
+              const SizedBox(height: 32),
+              CustomTextField(
+                icon: Icons.access_time,
+                label: 'Selected Time',
+                controller: _selectedTimeController,
+                onTap: () => pickTime(context),
+              ),
             ],
           ),
         ),
@@ -76,13 +95,23 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
     );
   }
 
+  Future<void> pickTime(BuildContext context) async {
+    picked = (await context.showCustomTimePicker(
+      use24HourFormat: true,
+    ))!;
+    _selectedTimeController.text = picked.format(context);
+    print('picked time $picked');
+  }
+
   void _createEvent() {
     if (_formKey.currentState!.validate()) {
+      print('create event ${widget.selectedDate}');
       EventEntity event = EventEntity(
         title: _titleController.text,
         id: widget.event?.id,
         description: _descriptionController.text,
         eventDate: widget.selectedDate,
+        eventTime: picked,
         isCompleted: false,
       );
       widget.event == null

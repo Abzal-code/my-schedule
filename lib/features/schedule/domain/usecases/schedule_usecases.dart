@@ -6,3 +6,4 @@ part 'create_event_usecase.dart';
 part 'delete_event_usecase.dart';
 part 'load_events_usecase.dart';
 part 'update_event_usecase.dart';
+part 'get_events_by_date_usecase.dart';

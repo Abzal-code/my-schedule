@@ -30,6 +30,7 @@ void setupCoreLocator() {
   sl.registerFactory(() => CreateEventUseCase(sl<ScheduleRepository>()));
   sl.registerFactory(() => DeleteEventUseCase(sl<ScheduleRepository>()));
   sl.registerFactory(() => UpdateEventUseCase(sl<ScheduleRepository>()));
+  sl.registerFactory(() => GetEventsByDateUseCase(sl<ScheduleRepository>()));
 
   // Register bloc
   sl.registerFactory(
@@ -47,6 +48,7 @@ void setupCoreLocator() {
       createEventUseCase: sl<CreateEventUseCase>(),
       deleteEventUseCase: sl<DeleteEventUseCase>(),
       updateEventUseCase: sl<UpdateEventUseCase>(),
+      getEventsByDateUseCase: sl<GetEventsByDateUseCase>(),
     ),
   );
 }

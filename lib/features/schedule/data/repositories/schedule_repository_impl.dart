@@ -25,4 +25,9 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   Future<void> updateEvent(EventEntity schedule) {
     return _storageService.updateEvent(schedule);
   }
+
+  @override
+  Stream<List<EventEntity>> getEventsByDate(DateTime date) {
+    return _storageService.getEventsByDate(date);
+  }
 }

@@ -20,6 +20,7 @@ mixin _$ScheduleEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() loadEvents,
     required TResult Function(EventEntity event) addEvent,
+    required TResult Function(DateTime date) getEventsByDate,
     required TResult Function(EventEntity event) deleteEvent,
     required TResult Function(EventEntity event) updateEvent,
   }) =>
@@ -28,6 +29,7 @@ mixin _$ScheduleEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadEvents,
     TResult? Function(EventEntity event)? addEvent,
+    TResult? Function(DateTime date)? getEventsByDate,
     TResult? Function(EventEntity event)? deleteEvent,
     TResult? Function(EventEntity event)? updateEvent,
   }) =>
@@ -36,6 +38,7 @@ mixin _$ScheduleEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadEvents,
     TResult Function(EventEntity event)? addEvent,
+    TResult Function(DateTime date)? getEventsByDate,
     TResult Function(EventEntity event)? deleteEvent,
     TResult Function(EventEntity event)? updateEvent,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$ScheduleEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_GetEventsByDate value) getEventsByDate,
     required TResult Function(_DeleteEvent value) deleteEvent,
     required TResult Function(_UpdateEvent value) updateEvent,
   }) =>
@@ -53,6 +57,7 @@ mixin _$ScheduleEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadEvents value)? loadEvents,
     TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_GetEventsByDate value)? getEventsByDate,
     TResult? Function(_DeleteEvent value)? deleteEvent,
     TResult? Function(_UpdateEvent value)? updateEvent,
   }) =>
@@ -61,6 +66,7 @@ mixin _$ScheduleEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_GetEventsByDate value)? getEventsByDate,
     TResult Function(_DeleteEvent value)? deleteEvent,
     TResult Function(_UpdateEvent value)? updateEvent,
     required TResult orElse(),
@@ -132,6 +138,7 @@ class _$LoadEventsImpl implements _LoadEvents {
   TResult when<TResult extends Object?>({
     required TResult Function() loadEvents,
     required TResult Function(EventEntity event) addEvent,
+    required TResult Function(DateTime date) getEventsByDate,
     required TResult Function(EventEntity event) deleteEvent,
     required TResult Function(EventEntity event) updateEvent,
   }) {
@@ -143,6 +150,7 @@ class _$LoadEventsImpl implements _LoadEvents {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadEvents,
     TResult? Function(EventEntity event)? addEvent,
+    TResult? Function(DateTime date)? getEventsByDate,
     TResult? Function(EventEntity event)? deleteEvent,
     TResult? Function(EventEntity event)? updateEvent,
   }) {
@@ -154,6 +162,7 @@ class _$LoadEventsImpl implements _LoadEvents {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadEvents,
     TResult Function(EventEntity event)? addEvent,
+    TResult Function(DateTime date)? getEventsByDate,
     TResult Function(EventEntity event)? deleteEvent,
     TResult Function(EventEntity event)? updateEvent,
     required TResult orElse(),
@@ -169,6 +178,7 @@ class _$LoadEventsImpl implements _LoadEvents {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_GetEventsByDate value) getEventsByDate,
     required TResult Function(_DeleteEvent value) deleteEvent,
     required TResult Function(_UpdateEvent value) updateEvent,
   }) {
@@ -180,6 +190,7 @@ class _$LoadEventsImpl implements _LoadEvents {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadEvents value)? loadEvents,
     TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_GetEventsByDate value)? getEventsByDate,
     TResult? Function(_DeleteEvent value)? deleteEvent,
     TResult? Function(_UpdateEvent value)? updateEvent,
   }) {
@@ -191,6 +202,7 @@ class _$LoadEventsImpl implements _LoadEvents {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_GetEventsByDate value)? getEventsByDate,
     TResult Function(_DeleteEvent value)? deleteEvent,
     TResult Function(_UpdateEvent value)? updateEvent,
     required TResult orElse(),
@@ -276,6 +288,7 @@ class _$AddEventImpl implements _AddEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() loadEvents,
     required TResult Function(EventEntity event) addEvent,
+    required TResult Function(DateTime date) getEventsByDate,
     required TResult Function(EventEntity event) deleteEvent,
     required TResult Function(EventEntity event) updateEvent,
   }) {
@@ -287,6 +300,7 @@ class _$AddEventImpl implements _AddEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadEvents,
     TResult? Function(EventEntity event)? addEvent,
+    TResult? Function(DateTime date)? getEventsByDate,
     TResult? Function(EventEntity event)? deleteEvent,
     TResult? Function(EventEntity event)? updateEvent,
   }) {
@@ -298,6 +312,7 @@ class _$AddEventImpl implements _AddEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadEvents,
     TResult Function(EventEntity event)? addEvent,
+    TResult Function(DateTime date)? getEventsByDate,
     TResult Function(EventEntity event)? deleteEvent,
     TResult Function(EventEntity event)? updateEvent,
     required TResult orElse(),
@@ -313,6 +328,7 @@ class _$AddEventImpl implements _AddEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_GetEventsByDate value) getEventsByDate,
     required TResult Function(_DeleteEvent value) deleteEvent,
     required TResult Function(_UpdateEvent value) updateEvent,
   }) {
@@ -324,6 +340,7 @@ class _$AddEventImpl implements _AddEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadEvents value)? loadEvents,
     TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_GetEventsByDate value)? getEventsByDate,
     TResult? Function(_DeleteEvent value)? deleteEvent,
     TResult? Function(_UpdateEvent value)? updateEvent,
   }) {
@@ -335,6 +352,7 @@ class _$AddEventImpl implements _AddEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_GetEventsByDate value)? getEventsByDate,
     TResult Function(_DeleteEvent value)? deleteEvent,
     TResult Function(_UpdateEvent value)? updateEvent,
     required TResult orElse(),
@@ -355,6 +373,165 @@ abstract class _AddEvent implements ScheduleEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddEventImplCopyWith<_$AddEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetEventsByDateImplCopyWith<$Res> {
+  factory _$$GetEventsByDateImplCopyWith(_$GetEventsByDateImpl value,
+          $Res Function(_$GetEventsByDateImpl) then) =
+      __$$GetEventsByDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$GetEventsByDateImplCopyWithImpl<$Res>
+    extends _$ScheduleEventCopyWithImpl<$Res, _$GetEventsByDateImpl>
+    implements _$$GetEventsByDateImplCopyWith<$Res> {
+  __$$GetEventsByDateImplCopyWithImpl(
+      _$GetEventsByDateImpl _value, $Res Function(_$GetEventsByDateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ScheduleEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$GetEventsByDateImpl(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetEventsByDateImpl implements _GetEventsByDate {
+  const _$GetEventsByDateImpl(this.date);
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'ScheduleEvent.getEventsByDate(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetEventsByDateImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  /// Create a copy of ScheduleEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetEventsByDateImplCopyWith<_$GetEventsByDateImpl> get copyWith =>
+      __$$GetEventsByDateImplCopyWithImpl<_$GetEventsByDateImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadEvents,
+    required TResult Function(EventEntity event) addEvent,
+    required TResult Function(DateTime date) getEventsByDate,
+    required TResult Function(EventEntity event) deleteEvent,
+    required TResult Function(EventEntity event) updateEvent,
+  }) {
+    return getEventsByDate(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadEvents,
+    TResult? Function(EventEntity event)? addEvent,
+    TResult? Function(DateTime date)? getEventsByDate,
+    TResult? Function(EventEntity event)? deleteEvent,
+    TResult? Function(EventEntity event)? updateEvent,
+  }) {
+    return getEventsByDate?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadEvents,
+    TResult Function(EventEntity event)? addEvent,
+    TResult Function(DateTime date)? getEventsByDate,
+    TResult Function(EventEntity event)? deleteEvent,
+    TResult Function(EventEntity event)? updateEvent,
+    required TResult orElse(),
+  }) {
+    if (getEventsByDate != null) {
+      return getEventsByDate(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadEvents value) loadEvents,
+    required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_GetEventsByDate value) getEventsByDate,
+    required TResult Function(_DeleteEvent value) deleteEvent,
+    required TResult Function(_UpdateEvent value) updateEvent,
+  }) {
+    return getEventsByDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_LoadEvents value)? loadEvents,
+    TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_GetEventsByDate value)? getEventsByDate,
+    TResult? Function(_DeleteEvent value)? deleteEvent,
+    TResult? Function(_UpdateEvent value)? updateEvent,
+  }) {
+    return getEventsByDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_GetEventsByDate value)? getEventsByDate,
+    TResult Function(_DeleteEvent value)? deleteEvent,
+    TResult Function(_UpdateEvent value)? updateEvent,
+    required TResult orElse(),
+  }) {
+    if (getEventsByDate != null) {
+      return getEventsByDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetEventsByDate implements ScheduleEvent {
+  const factory _GetEventsByDate(final DateTime date) = _$GetEventsByDateImpl;
+
+  DateTime get date;
+
+  /// Create a copy of ScheduleEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetEventsByDateImplCopyWith<_$GetEventsByDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -428,6 +605,7 @@ class _$DeleteEventImpl implements _DeleteEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() loadEvents,
     required TResult Function(EventEntity event) addEvent,
+    required TResult Function(DateTime date) getEventsByDate,
     required TResult Function(EventEntity event) deleteEvent,
     required TResult Function(EventEntity event) updateEvent,
   }) {
@@ -439,6 +617,7 @@ class _$DeleteEventImpl implements _DeleteEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadEvents,
     TResult? Function(EventEntity event)? addEvent,
+    TResult? Function(DateTime date)? getEventsByDate,
     TResult? Function(EventEntity event)? deleteEvent,
     TResult? Function(EventEntity event)? updateEvent,
   }) {
@@ -450,6 +629,7 @@ class _$DeleteEventImpl implements _DeleteEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadEvents,
     TResult Function(EventEntity event)? addEvent,
+    TResult Function(DateTime date)? getEventsByDate,
     TResult Function(EventEntity event)? deleteEvent,
     TResult Function(EventEntity event)? updateEvent,
     required TResult orElse(),
@@ -465,6 +645,7 @@ class _$DeleteEventImpl implements _DeleteEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_GetEventsByDate value) getEventsByDate,
     required TResult Function(_DeleteEvent value) deleteEvent,
     required TResult Function(_UpdateEvent value) updateEvent,
   }) {
@@ -476,6 +657,7 @@ class _$DeleteEventImpl implements _DeleteEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadEvents value)? loadEvents,
     TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_GetEventsByDate value)? getEventsByDate,
     TResult? Function(_DeleteEvent value)? deleteEvent,
     TResult? Function(_UpdateEvent value)? updateEvent,
   }) {
@@ -487,6 +669,7 @@ class _$DeleteEventImpl implements _DeleteEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_GetEventsByDate value)? getEventsByDate,
     TResult Function(_DeleteEvent value)? deleteEvent,
     TResult Function(_UpdateEvent value)? updateEvent,
     required TResult orElse(),
@@ -580,6 +763,7 @@ class _$UpdateEventImpl implements _UpdateEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() loadEvents,
     required TResult Function(EventEntity event) addEvent,
+    required TResult Function(DateTime date) getEventsByDate,
     required TResult Function(EventEntity event) deleteEvent,
     required TResult Function(EventEntity event) updateEvent,
   }) {
@@ -591,6 +775,7 @@ class _$UpdateEventImpl implements _UpdateEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadEvents,
     TResult? Function(EventEntity event)? addEvent,
+    TResult? Function(DateTime date)? getEventsByDate,
     TResult? Function(EventEntity event)? deleteEvent,
     TResult? Function(EventEntity event)? updateEvent,
   }) {
@@ -602,6 +787,7 @@ class _$UpdateEventImpl implements _UpdateEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadEvents,
     TResult Function(EventEntity event)? addEvent,
+    TResult Function(DateTime date)? getEventsByDate,
     TResult Function(EventEntity event)? deleteEvent,
     TResult Function(EventEntity event)? updateEvent,
     required TResult orElse(),
@@ -617,6 +803,7 @@ class _$UpdateEventImpl implements _UpdateEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_GetEventsByDate value) getEventsByDate,
     required TResult Function(_DeleteEvent value) deleteEvent,
     required TResult Function(_UpdateEvent value) updateEvent,
   }) {
@@ -628,6 +815,7 @@ class _$UpdateEventImpl implements _UpdateEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadEvents value)? loadEvents,
     TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_GetEventsByDate value)? getEventsByDate,
     TResult? Function(_DeleteEvent value)? deleteEvent,
     TResult? Function(_UpdateEvent value)? updateEvent,
   }) {
@@ -639,6 +827,7 @@ class _$UpdateEventImpl implements _UpdateEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_GetEventsByDate value)? getEventsByDate,
     TResult Function(_DeleteEvent value)? deleteEvent,
     TResult Function(_UpdateEvent value)? updateEvent,
     required TResult orElse(),
@@ -669,6 +858,7 @@ mixin _$ScheduleState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -679,6 +869,7 @@ mixin _$ScheduleState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -689,6 +880,7 @@ mixin _$ScheduleState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -700,6 +892,7 @@ mixin _$ScheduleState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -710,6 +903,7 @@ mixin _$ScheduleState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -720,6 +914,7 @@ mixin _$ScheduleState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -793,6 +988,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -806,6 +1002,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -819,6 +1016,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -836,6 +1034,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -849,6 +1048,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -862,6 +1062,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -922,6 +1123,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -935,6 +1137,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -948,6 +1151,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -965,6 +1169,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -978,6 +1183,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -991,6 +1197,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -1084,6 +1291,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -1097,6 +1305,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -1110,6 +1319,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -1127,6 +1337,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -1140,6 +1351,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -1153,6 +1365,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -1174,6 +1387,185 @@ abstract class _Loaded implements ScheduleState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GotEventsByDateImplCopyWith<$Res> {
+  factory _$$GotEventsByDateImplCopyWith(_$GotEventsByDateImpl value,
+          $Res Function(_$GotEventsByDateImpl) then) =
+      __$$GotEventsByDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<EventEntity> events});
+}
+
+/// @nodoc
+class __$$GotEventsByDateImplCopyWithImpl<$Res>
+    extends _$ScheduleStateCopyWithImpl<$Res, _$GotEventsByDateImpl>
+    implements _$$GotEventsByDateImplCopyWith<$Res> {
+  __$$GotEventsByDateImplCopyWithImpl(
+      _$GotEventsByDateImpl _value, $Res Function(_$GotEventsByDateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ScheduleState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? events = null,
+  }) {
+    return _then(_$GotEventsByDateImpl(
+      null == events
+          ? _value._events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<EventEntity>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GotEventsByDateImpl implements _GotEventsByDate {
+  const _$GotEventsByDateImpl(final List<EventEntity> events)
+      : _events = events;
+
+  final List<EventEntity> _events;
+  @override
+  List<EventEntity> get events {
+    if (_events is EqualUnmodifiableListView) return _events;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_events);
+  }
+
+  @override
+  String toString() {
+    return 'ScheduleState.gotEventsByDate(events: $events)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GotEventsByDateImpl &&
+            const DeepCollectionEquality().equals(other._events, _events));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_events));
+
+  /// Create a copy of ScheduleState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GotEventsByDateImplCopyWith<_$GotEventsByDateImpl> get copyWith =>
+      __$$GotEventsByDateImplCopyWithImpl<_$GotEventsByDateImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
+    required TResult Function() updated,
+    required TResult Function() empty,
+    required TResult Function(String string) error,
+  }) {
+    return gotEventsByDate(events);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
+    TResult? Function()? updated,
+    TResult? Function()? empty,
+    TResult? Function(String string)? error,
+  }) {
+    return gotEventsByDate?.call(events);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
+    TResult Function()? updated,
+    TResult Function()? empty,
+    TResult Function(String string)? error,
+    required TResult orElse(),
+  }) {
+    if (gotEventsByDate != null) {
+      return gotEventsByDate(events);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
+    required TResult Function(_Updated value) updated,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Error value) error,
+  }) {
+    return gotEventsByDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
+    TResult? Function(_Updated value)? updated,
+    TResult? Function(_Empty value)? empty,
+    TResult? Function(_Error value)? error,
+  }) {
+    return gotEventsByDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (gotEventsByDate != null) {
+      return gotEventsByDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GotEventsByDate implements ScheduleState {
+  const factory _GotEventsByDate(final List<EventEntity> events) =
+      _$GotEventsByDateImpl;
+
+  List<EventEntity> get events;
+
+  /// Create a copy of ScheduleState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GotEventsByDateImplCopyWith<_$GotEventsByDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1221,6 +1613,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -1234,6 +1627,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -1247,6 +1641,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -1264,6 +1659,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -1277,6 +1673,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -1290,6 +1687,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -1350,6 +1748,7 @@ class _$EmptyImpl implements _Empty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -1363,6 +1762,7 @@ class _$EmptyImpl implements _Empty {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -1376,6 +1776,7 @@ class _$EmptyImpl implements _Empty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -1393,6 +1794,7 @@ class _$EmptyImpl implements _Empty {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -1406,6 +1808,7 @@ class _$EmptyImpl implements _Empty {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -1419,6 +1822,7 @@ class _$EmptyImpl implements _Empty {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -1506,6 +1910,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<EventEntity> events) loaded,
+    required TResult Function(List<EventEntity> events) gotEventsByDate,
     required TResult Function() updated,
     required TResult Function() empty,
     required TResult Function(String string) error,
@@ -1519,6 +1924,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<EventEntity> events)? loaded,
+    TResult? Function(List<EventEntity> events)? gotEventsByDate,
     TResult? Function()? updated,
     TResult? Function()? empty,
     TResult? Function(String string)? error,
@@ -1532,6 +1938,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<EventEntity> events)? loaded,
+    TResult Function(List<EventEntity> events)? gotEventsByDate,
     TResult Function()? updated,
     TResult Function()? empty,
     TResult Function(String string)? error,
@@ -1549,6 +1956,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_GotEventsByDate value) gotEventsByDate,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -1562,6 +1970,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_GotEventsByDate value)? gotEventsByDate,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -1575,6 +1984,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_GotEventsByDate value)? gotEventsByDate,
     TResult Function(_Updated value)? updated,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
