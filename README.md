@@ -1,4 +1,4 @@
-# my_shedule
+# My shedule
 
 A new Flutter project.
 
@@ -6,11 +6,15 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+My Schedule — это мобильное приложение-планировщик задач, разработанное на Flutter. Приложение позволяет пользователям эффективно управлять своими задачами и событиями с помощью удобного календаря и списка задач. Для аутентификации используется Firebase Authentication, а данные хранятся в Firestore.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Функциональность
+Аутентификация: Регистрация и вход пользователей через Firebase Authentication.
+CRUD операции: Создание, чтение, обновление и удаление задач с использованием Firestore.
+Календарь задач: Интерактивный виджет календаря для выбора даты.
+Список задач: Отображение списка задач, связанных с выбранной датой.
+Дизайн: Приложение оформлено в стиле glassmorphism для современного и привлекательного интерфейса.
+Будущие обновления
+Интеграция данных с календарем: Привязка задач к определенным датам для отображения событий дня.
+Уведомления: Добавление напоминаний о предстоящих событиях и задачах.
+Улучшения UI/UX: Доработка интерфейса и пользовательского опыта.
