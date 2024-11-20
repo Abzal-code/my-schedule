@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_shedule/core/di.dart';
-import 'package:my_shedule/core/di.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
 import 'package:my_shedule/features/schedule/presentation/pages/schedule_screen.dart';
@@ -29,7 +29,7 @@ class EventsList extends StatelessWidget {
               events[index].title,
               style: const TextStyle(color: Colors.blue),
             ),
-            subtitle: Text(events[index].description ?? '',
+            subtitle: Text(DateHelper.formatDate(events[index].eventDate),
                 style: TextStyle(color: colorScheme.surface)),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
@@ -43,12 +43,13 @@ class EventsList extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                    onPressed: () => sl<ScheduleBloc>().add(
-                          ScheduleEvent.deleteEvent(
-                            events[index],
-                          ),
+                  onPressed: () => context.read<ScheduleBloc>().add(
+                        ScheduleEvent.deleteEvent(
+                          events[index],
                         ),
-                    icon: const Icon(Icons.delete, color: Colors.red)),
+                      ),
+                  icon: const Icon(Icons.delete, color: Colors.red),
+                ),
               ],
             ),
             onTap: () => print(events[index].id),

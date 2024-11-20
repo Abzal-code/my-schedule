@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_shedule/features/schedule/presentation/widgets/animated_background.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 
@@ -27,43 +28,50 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign In')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomTextField(
-                controller: emailController,
-                label: 'Email',
-                icon: Icons.email,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                controller: passwordController,
-                label: 'Password',
-                icon: Icons.lock,
-                obscureText: true,
-                keyboardType: TextInputType.visiblePassword,
-              ),
-              const SizedBox(height: 32),
-              CustomButton(
-                label: 'Sign In',
-                onPressed: () => _signIn(),
-              ),
-              TextButton(
-                onPressed: () {
-                  context.push('/signUp');
-                },
-                child: const Text('Don’t have an account? Sign Up'),
-              ),
-            ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text('Sign In'),
+        backgroundColor: Colors.transparent,
+      ),
+      body: Stack(children: [
+        const Positioned.fill(child: AnimatedGradientDemo()),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomTextField(
+                  controller: emailController,
+                  label: 'Email',
+                  icon: Icons.email,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 16),
+                CustomTextField(
+                  controller: passwordController,
+                  label: 'Password',
+                  icon: Icons.lock,
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                ),
+                const SizedBox(height: 32),
+                CustomButton(
+                  label: 'Sign In',
+                  onPressed: () => _signIn(),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.push('/signUp');
+                  },
+                  child: const Text('Don’t have an account? Sign Up'),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 

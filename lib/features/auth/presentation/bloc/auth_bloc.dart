@@ -50,6 +50,7 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
 
   Future<void> _signUp(_SignUpEvent event, Emitter<AuthState> emit) async {
     emit(const AuthState.loading());
+    print('signUp');
     try {
       await _signUpUseCase
           .call(AuthParams(email: event.email, password: event.password));
@@ -62,6 +63,7 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
 
   Future<void> _signOut(Emitter<AuthState> emit) async {
     emit(const AuthState.loading());
+    print('signOut');
     try {
       await _signOutUseCase.call(const NoParams());
       emit(const AuthState.unauthenticated());

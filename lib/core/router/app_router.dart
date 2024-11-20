@@ -57,12 +57,12 @@ class AppRouter {
       GoRoute(
         path: Routes.signIn,
         name: 'signIn',
-        builder: (context, state) => SignInScreen(),
+        builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
         path: Routes.signUp,
         name: 'signUp',
-        builder: (context, state) => SignUpScreen(),
+        builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
         path: Routes.schedule,

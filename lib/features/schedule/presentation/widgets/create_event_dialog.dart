@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/core/utils/extensions.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
@@ -105,7 +106,6 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
 
   void _createEvent() {
     if (_formKey.currentState!.validate()) {
-      print('create event ${widget.selectedDate}');
       EventEntity event = EventEntity(
         title: _titleController.text,
         id: widget.event?.id,
@@ -115,12 +115,12 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
         isCompleted: false,
       );
       widget.event == null
-          ? sl<ScheduleBloc>().add(
-              ScheduleEvent.addEvent(event),
-            )
-          : sl<ScheduleBloc>().add(
-              ScheduleEvent.updateEvent(event),
-            );
+          ? context.read<ScheduleBloc>().add(
+                ScheduleEvent.addEvent(event),
+              )
+          : context.read<ScheduleBloc>().add(
+                ScheduleEvent.updateEvent(event),
+              );
       Navigator.of(context).pop();
     }
   }

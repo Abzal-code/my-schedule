@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_shedule/core/utils/helpers.dart';
 
 class EventEntity extends Equatable {
   final String? id;
@@ -29,19 +30,20 @@ class EventEntity extends Equatable {
       description: data['description'] ?? '',
       img: data['img'] ?? '',
       eventDate: (data['eventDate'] as Timestamp).toDate(),
-      eventTime:
-          TimeOfDay.fromDateTime((data['eventDate'] as Timestamp).toDate()),
+      eventTime: DateHelper.timeOfDayFromString(data['eventTime'] as String),
       isCompleted: data['isCompleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toMap() {
+    final Timestamp eventDate =
+        Timestamp.fromDate(DateHelper.toDateTime(this.eventDate));
     return {
       'title': title,
       'description': description,
       'img': img,
-      'eventDate': Timestamp.fromDate(eventDate),
-      'eventTime': eventTime,
+      'eventDate': eventDate,
+      'eventTime': DateHelper.timeOfDayToString(eventTime),
       'isCompleted': isCompleted,
     };
   }

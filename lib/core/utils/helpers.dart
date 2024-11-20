@@ -7,19 +7,14 @@ class DateHelper {
   static String formatDate(
     DateTime date, {
     String format = 'dd.MM.yyyy',
-  }) {
-    // Используем пакет intl для форматирования дат.
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year.toString().padLeft(4, '0')}';
-  }
+  }) =>
+      '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year.toString().padLeft(4, '0')}';
 
-  /// Форматирует дату в строку по указанному шаблону.
   static String formatTime(
     DateTime date, {
-    String format = 'HH:mm:ss',
-  }) {
-    // Используем пакет intl для форматирования дат.
-    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}:${date.second.toString().padLeft(2, '0')}';
-  }
+    String format = 'HH:mm',
+  }) =>
+      '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
 
   /// Форматирует дату в строку по указанному шаблону.
   static String formatDateTime(
@@ -27,6 +22,19 @@ class DateHelper {
     String format = 'dd/MM/yyyy HH:mm:ss',
   }) =>
       '${formatDate(date, format: format)} ${formatTime(date, format: format)}';
+
+  static TimeOfDay timeOfDayFromString(String timeString) {
+    final parts = timeString.split(':');
+    final hour = int.parse(parts[0]);
+    final minute = int.parse(parts[1]);
+    return TimeOfDay(hour: hour, minute: minute);
+  }
+
+  static String timeOfDayToString(TimeOfDay time) =>
+      '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+
+  static DateTime toDateTime(DateTime date) =>
+      DateTime(date.year, date.month, date.day);
 }
 
 class StringHelper {

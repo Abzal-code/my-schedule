@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
@@ -63,6 +65,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         _focusedDate = focusedDate;
       });
       widget.onDataChanged(selectedDate);
+      context
+          .read<ScheduleBloc>()
+          .add(ScheduleEvent.getEventsByDate(selectedDate));
     }
   }
 

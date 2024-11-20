@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_shedule/core/utils/helpers.dart';
+import 'package:my_shedule/features/auth/presentation/widgets/custom_button.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
+import 'package:my_shedule/features/schedule/presentation/widgets/choose_get_events_widget.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/event_list.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/grabber.dart';
 
 class EventsInfoWindow extends StatefulWidget {
-  const EventsInfoWindow({super.key});
+  final DateTime selectedDate;
+  const EventsInfoWindow({super.key, required this.selectedDate});
 
   @override
   State<EventsInfoWindow> createState() => _EventsInfoWindowState();
@@ -17,8 +21,6 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     return DraggableScrollableSheet(
       initialChildSize: _sheetPosition,
       builder: (BuildContext context, ScrollController scrollController) {
@@ -43,6 +45,9 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
                   });
                 },
               ),
+              ChooseGetEvents(
+                selectedDate: DateHelper.toDateTime(widget.selectedDate),
+              ),
               Flexible(
                 child: BlocBuilder<ScheduleBloc, ScheduleState>(
                   builder: (context, state) {
@@ -51,6 +56,10 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
                         child: CircularProgressIndicator(),
                       ),
                       loaded: (events) => EventsList(
+                        scrollController: scrollController,
+                        events: events,
+                      ),
+                      gotEventsByDate: (events) => EventsList(
                         scrollController: scrollController,
                         events: events,
                       ),

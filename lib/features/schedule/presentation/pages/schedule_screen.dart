@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
@@ -67,7 +66,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: CalendarWidget(onDataChanged: _onDateSelected),
                       ),
-                      const Flexible(child: EventsInfoWindow()),
+                      Flexible(child: EventsInfoWindow(selectedDate: _selectedDate,)),
                     ],
                   ),
                 ),
