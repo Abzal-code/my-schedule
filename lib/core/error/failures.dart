@@ -28,7 +28,7 @@ class ServerResponseFailure extends Failure {
 class CacheFailure extends Failure {
   const CacheFailure()
       : super(
-          errorMsg: "Cache Failure",
+          errorMsg: 'Cache Failure',
         );
 }
 
@@ -39,8 +39,8 @@ class AuthFailure extends Failure {
 class NetworkFailure extends Failure {
   const NetworkFailure()
       : super(
-          errorMsg: "Network Failure",
-          errorDescription: "Please check your internet connection",
+          errorMsg: 'Network Failure',
+          errorDescription: 'Please check your internet connection',
         );
 }
 
@@ -48,7 +48,6 @@ class UnexpectedFailure extends Failure {
   const UnexpectedFailure({
     super.exception,
   }) : super(
-          errorMsg:
-              "Something went wrong. Please try again later.",
+          errorMsg: 'Something went wrong. Please try again later.',
         );
 }

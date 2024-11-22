@@ -19,7 +19,9 @@ class EventsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return ListView.separated(
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (BuildContext context, int index) => Divider(
+        color: Colors.white.withOpacity(0.5),
+      ),
       controller: scrollController,
       itemCount: events.length,
       itemBuilder: (BuildContext context, int index) {
@@ -31,13 +33,22 @@ class EventsList extends StatelessWidget {
             ),
             title: Text(
               events[index].title,
-              style: const TextStyle(color: Colors.blue),
+              style: TextStyle(
+                color: colorScheme.surface,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            subtitle: Text(DateHelper.formatDate(events[index].eventDate),
-                style: TextStyle(color: colorScheme.surface)),
+            subtitle: Text(
+              DateHelper.formatDate(events[index].eventDate),
+              style: TextStyle(
+                color: colorScheme.surface,
+                fontSize: 12,
+              ),
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 IconButton(
                   onPressed: () => openDialog(context, events[index].eventDate,
                       event: events[index]),

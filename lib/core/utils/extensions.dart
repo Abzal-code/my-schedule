@@ -10,7 +10,8 @@ extension TimePickerExtensions on BuildContext {
       initialTime: initialTime ?? TimeOfDay.now(),
       builder: (BuildContext context, Widget? child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: use24HourFormat),
+          data: MediaQuery.of(context)
+              .copyWith(alwaysUse24HourFormat: use24HourFormat),
           child: child!,
         );
       },

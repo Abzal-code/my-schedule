@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shedule/core/di.dart';
 import 'package:my_shedule/core/utils/extensions.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/auth/presentation/widgets/custom_text_field.dart';
@@ -17,7 +16,7 @@ class CreateEventDialog extends StatefulWidget {
 }
 
 class _CreateEventDialogState extends State<CreateEventDialog> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _selectedDateController = TextEditingController();
@@ -53,7 +52,7 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
         child: Form(
           key: _formKey,
           child: Column(
-            children: [
+            children: <Widget>[
               CustomTextField(
                 icon: Icons.title,
                 label: 'Title',
