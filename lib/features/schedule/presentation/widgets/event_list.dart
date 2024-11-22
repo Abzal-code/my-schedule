@@ -18,13 +18,17 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const Divider(),
       controller: scrollController,
       itemCount: events.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           child: ListTile(
-            leading: const Icon(Icons.event),
+            leading: Icon(
+              Icons.event,
+              color: Colors.white.withOpacity(0.5),
+            ),
             title: Text(
               events[index].title,
               style: const TextStyle(color: Colors.blue),

@@ -19,13 +19,13 @@ class ChooseGetEvents extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomListTile(
+        CustomCard(
           title: 'Get All Events',
           icon: Icons.list,
           onTap: () => _getAllEvents(context),
         ),
-        CustomListTile(
-          title: 'Get Events for ${DateHelper.formatDate(selectedDate)}',
+        CustomCard(
+          title: 'Get by ${DateHelper.formatDate(selectedDate)}',
           icon: Icons.calendar_month,
           onTap: () => _getEventsByDate(context),
         ),
@@ -34,12 +34,12 @@ class ChooseGetEvents extends StatelessWidget {
   }
 }
 
-class CustomListTile extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   final String title;
   final IconData icon;
   final GestureTapCallback? onTap;
 
-  const CustomListTile({
+  const CustomCard({
     super.key,
     required this.title,
     required this.icon,
@@ -47,22 +47,43 @@ class CustomListTile extends StatelessWidget {
   });
 
   @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  Color cardColor = Colors.transparent;
+
+  void _onTap() {
+    widget.onTap?.call();
+    setState(() {
+      cardColor = const Color.fromARGB(220, 231, 120, 86);
+    });
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        cardColor = Colors.transparent;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: onTap,
-        child: ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          iconColor: Colors.white.withOpacity(0.5),
-          tileColor: Colors.transparent,
-          leading: Icon(
-            icon,
-          ),
-          title: Text(
-            title,
-            style: const TextStyle(color: Colors.white),
+        onTap: _onTap,
+        child: Card(
+          color: cardColor,
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            iconColor: Colors.white.withOpacity(0.5),
+            leading: Icon(
+              widget.icon,
+            ),
+            title: Text(
+              widget.title,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
