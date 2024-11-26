@@ -18,12 +18,8 @@ class FirestoreServiceImpl extends FirestoreService {
   @override
   Future<EventEntity> addEvent(EventEntity event) async {
     try {
-      print('Attempting to add event: ${event.toMap()}');
-      // Создаем новый документ с автоматическим ID
-      DocumentReference docRef = await _eventsCollection.add(event.toMap());
-      // Создаем новый экземпляр EventEntity с установленным ID
+      final DocumentReference docRef = await _eventsCollection.add(event.toMap());
       final newEvent = event.copyWith(id: docRef.id);
-      print('Event added with ID: ${newEvent.id}');
       return newEvent;
     } catch (e, stackTrace) {
       print('Error adding event: $e');
@@ -39,7 +35,6 @@ class FirestoreServiceImpl extends FirestoreService {
     }
     try {
       await _eventsCollection.doc(event.id).update(event.toMap());
-      print('Event updated with ID: ${event.id}');
     } catch (e, stackTrace) {
       print('Error updating event: $e');
       print('Stack trace: $stackTrace');
@@ -61,7 +56,6 @@ class FirestoreServiceImpl extends FirestoreService {
 
   @override
   Stream<List<EventEntity>> getEvents() {
-    print('Start getting events from service');
     return _eventsCollection.snapshots().map((snapshot) {
       return snapshot.docs
           .map(
@@ -74,7 +68,6 @@ class FirestoreServiceImpl extends FirestoreService {
   @override
   Stream<List<EventEntity>> getEventsByDate(DateTime date) {
     final eventDate = DateTime(date.year, date.month, date.day);
-    print('Start getting events by date from service $eventDate');
     return _eventsCollection
         .where('eventDate', isEqualTo: eventDate)
         .snapshots()
