@@ -64,7 +64,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: CalendarWidget(onDataChanged: _onDateSelected),
+                        child: CalendarWidget(
+                          onDataChanged: _onDateSelected,
+                        ),
                       ),
                       Flexible(
                           child: EventsInfoWindow(

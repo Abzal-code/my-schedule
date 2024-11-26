@@ -30,7 +30,7 @@ class EventEntity extends Equatable {
       description: data['description'] ?? '',
       img: data['img'] ?? '',
       eventDate: (data['eventDate'] as Timestamp).toDate(),
-      eventTime: DateHelper.timeOfDayFromString(data['eventTime'] as String),
+      eventTime: TimeHelper.timeOfDayFromString(data['eventTime'] as String),
       isCompleted: data['isCompleted'] ?? false,
     );
   }
@@ -43,7 +43,7 @@ class EventEntity extends Equatable {
       'description': description,
       'img': img,
       'eventDate': eventDate,
-      'eventTime': DateHelper.timeOfDayToString(eventTime),
+      'eventTime': TimeHelper.timeOfDayToString(eventTime),
       'isCompleted': isCompleted,
     };
   }
@@ -67,6 +67,8 @@ class EventEntity extends Equatable {
       isCompleted: isCompleted ?? this.isCompleted,
     );
   }
+
+  String get getTimeOnString => TimeHelper.timeOfDayToString(eventTime);
 
   @override
   List<Object?> get props => [

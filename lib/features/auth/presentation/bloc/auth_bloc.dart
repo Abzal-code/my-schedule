@@ -29,10 +29,10 @@ class AuthBloc extends BaseBloc<AuthEvent, AuthState> {
   @override
   Future<void> onEventHandler(AuthEvent event, Emitter<AuthState> emit) async {
     await event.map(
-      signIn: (e) async => await _signIn(e, emit),
-      signUp: (e) async => await _signUp(e, emit),
-      signOut: (e) async => await _signOut(emit),
-      checkAuthentication: (e) async => await _checkAuthentication(emit),
+      signIn: (e) => _signIn(e, emit),
+      signUp: (e) => _signUp(e, emit),
+      signOut: (e) => _signOut(emit),
+      checkAuthentication: (e) => _checkAuthentication(emit),
     );
   }
 

@@ -17,11 +17,10 @@ abstract class BaseBloc<Event, State> extends Bloc<Event, State> {
   /// Конструктор базового блока.
   BaseBloc(
     super.initialState, {
-    EventTransformer<Event>? transformer,
-  }) : eventTransformer = transformer ?? concurrency.sequential() {
-    // Регистрация обработчика событий.
+    EventTransformer<Event>? eventTransformer,
+  }) : eventTransformer = eventTransformer ?? concurrency.sequential() {
     on<Event>(
-      (event, emit) async => await onEventHandler(event, emit),
+      onEventHandler,
       transformer: eventTransformer,
     );
   }
@@ -36,8 +35,8 @@ abstract class BaseBloc<Event, State> extends Bloc<Event, State> {
 
   /// Переопределение метода `close` для закрытия контроллера.
   @override
-  Future<void> close() {
-    _uiActionController.close();
+  Future<void> close() async {
+    await _uiActionController.close();
     return super.close();
   }
 }

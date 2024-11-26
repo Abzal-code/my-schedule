@@ -39,12 +39,23 @@ class EventsList extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Text(
-              DateHelper.formatDate(events[index].eventDate),
-              style: TextStyle(
-                color: colorScheme.surface,
-                fontSize: 12,
-              ),
+            subtitle: Row(
+              children: [
+                Text(
+                  DateHelper.formatDate(events[index].eventDate),
+                  style: TextStyle(
+                    color: colorScheme.surface,
+                    fontSize: 12,
+                  ),
+                ),
+                Text(
+                  ' | ${events[index].getTimeOnString}',
+                  style: TextStyle(
+                    color: colorScheme.surface,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
             ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,

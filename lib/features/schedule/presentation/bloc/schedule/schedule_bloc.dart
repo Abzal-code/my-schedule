@@ -33,13 +33,13 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
   Future<void> onEventHandler(
     ScheduleEvent event,
     Emitter<ScheduleState> emit,
-  ) {
-    return event.map(
-      loadEvents: (e) async => await _loadEvents(e, emit),
-      addEvent: (e) async => await _createEvent(e, emit),
-      updateEvent: (e) async => await _updateEvent(e, emit),
-      deleteEvent: (e) async => await _deleteEvent(e, emit),
-      getEventsByDate: (e) async => await _getEventsByDate(e, emit),
+  ) async {
+    await event.map(
+      loadEvents: (e) => _loadEvents(e, emit),
+      addEvent: (e) => _createEvent(e, emit),
+      updateEvent: (e) => _updateEvent(e, emit),
+      deleteEvent: (e) => _deleteEvent(e, emit),
+      getEventsByDate: (e) => _getEventsByDate(e, emit),
     );
   }
 
@@ -57,7 +57,6 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
   }
 
   Future<void> _emitLoadedEvents(Emitter<ScheduleState> emit) async {
-    emit(const ScheduleState.loading());
     try {
       await emit.forEach<List<EventEntity>>(
         _loadEventsUseCase.call(const NoParams()),
@@ -81,7 +80,6 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
     Emitter<ScheduleState> emit,
   ) async {
     emit(const ScheduleState.loading());
-    print('_getEventsByDate ${event.date}');
     try {
       await emit.forEach<List<EventEntity>>(
         _getEventsByDateUseCase.call(event.date),
@@ -96,11 +94,8 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
     _AddEvent event,
     Emitter<ScheduleState> emit,
   ) async {
-    print('_createEvent ${event.event.id}');
-    emit(const ScheduleState.loading());
     try {
       await _createEventUseCase.call(event.event);
-      emit(const ScheduleState.updated());
     } catch (e) {
       emit(ScheduleState.error(e.toString()));
     }
@@ -110,11 +105,9 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
     _UpdateEvent event,
     Emitter<ScheduleState> emit,
   ) async {
-    print('_updateEvent ${event.event.id}');
     emit(const ScheduleState.loading());
     try {
       await _updateEventUseCase.call(event.event);
-      emit(const ScheduleState.updated());
     } catch (e) {
       emit(ScheduleState.error(e.toString()));
     }
@@ -124,11 +117,8 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
     _DeleteEvent event,
     Emitter<ScheduleState> emit,
   ) async {
-    print('_deleteEvent ${event.event.id}');
-    emit(const ScheduleState.loading());
     try {
       await _deleteEventUseCase.call(event.event.id!);
-      emit(const ScheduleState.updated());
     } catch (e) {
       emit(ScheduleState.error(e.toString()));
     }

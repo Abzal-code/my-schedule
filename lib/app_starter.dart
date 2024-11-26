@@ -18,7 +18,7 @@ class AppStarter extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) => sl<ScheduleBloc>()
             ..add(
-              const ScheduleEvent.loadEvents(),
+              ScheduleEvent.getEventsByDate(DateTime.now()),
             ),
         ),
       ],

@@ -23,6 +23,11 @@ class DateHelper {
   }) =>
       '${formatDate(date, format: format)} ${formatTime(date, format: format)}';
 
+  static DateTime toDateTime(DateTime date) =>
+      DateTime(date.year, date.month, date.day);
+}
+
+class TimeHelper {
   static TimeOfDay timeOfDayFromString(String timeString) {
     final parts = timeString.split(':');
     final hour = int.parse(parts[0]);
@@ -32,9 +37,6 @@ class DateHelper {
 
   static String timeOfDayToString(TimeOfDay time) =>
       '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-
-  static DateTime toDateTime(DateTime date) =>
-      DateTime(date.year, date.month, date.day);
 }
 
 class StringHelper {
