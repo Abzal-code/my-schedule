@@ -6,6 +6,7 @@ abstract class FirestoreService {
   Future<EventEntity> addEvent(EventEntity event);
   Future<void> updateEvent(EventEntity event);
   Future<void> deleteEvent(String id);
+  Future<void> deleteAllEvents();
   Stream<List<EventEntity>> getEventsByDate(DateTime date);
 }
 
@@ -18,7 +19,8 @@ class FirestoreServiceImpl extends FirestoreService {
   @override
   Future<EventEntity> addEvent(EventEntity event) async {
     try {
-      final DocumentReference docRef = await _eventsCollection.add(event.toMap());
+      final DocumentReference docRef =
+          await _eventsCollection.add(event.toMap());
       final newEvent = event.copyWith(id: docRef.id);
       return newEvent;
     } catch (e, stackTrace) {
@@ -76,5 +78,18 @@ class FirestoreServiceImpl extends FirestoreService {
               (doc) => EventEntity.fromDocument(doc),
             )
             .toList());
+  }
+
+  @override
+  Future<void> deleteAllEvents() async {
+    try {
+      await _eventsCollection.get().then((querySnapshot) {
+        for (var doc in querySnapshot.docs) {
+          doc.reference.delete();
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 }

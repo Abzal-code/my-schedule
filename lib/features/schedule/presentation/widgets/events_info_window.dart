@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
-import 'package:my_shedule/features/schedule/presentation/widgets/choose_get_events_widget.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/event_list.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/grabber.dart';
 
@@ -43,9 +41,6 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
                     }
                   });
                 },
-              ),
-              ChooseGetEvents(
-                selectedDate: DateHelper.toDateTime(widget.selectedDate),
               ),
               Flexible(
                 child: BlocBuilder<ScheduleBloc, ScheduleState>(

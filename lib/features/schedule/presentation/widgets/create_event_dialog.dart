@@ -52,6 +52,7 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               CustomTextField(
                 icon: Icons.title,

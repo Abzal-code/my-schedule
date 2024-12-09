@@ -2,9 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
+import 'package:my_shedule/features/schedule/presentation/widgets/choose_get_events_widget.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/create_event_dialog.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/animated_background.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/calendar_widget.dart';
@@ -60,18 +62,20 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: SafeArea(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: CalendarWidget(
-                          onDataChanged: _onDateSelected,
+                      CalendarWidget(
+                        onDataChanged: _onDateSelected,
+                      ),
+                      const SizedBox(height: 16),
+                      ChooseGetEvents(
+                        selectedDate: DateHelper.toDateTime(_selectedDate),
+                      ),
+                      const SizedBox(height: 16),
+                      Flexible(
+                        child: EventsInfoWindow(
+                          selectedDate: _selectedDate,
                         ),
                       ),
-                      Flexible(
-                          child: EventsInfoWindow(
-                        selectedDate: _selectedDate,
-                      )),
                     ],
                   ),
                 ),

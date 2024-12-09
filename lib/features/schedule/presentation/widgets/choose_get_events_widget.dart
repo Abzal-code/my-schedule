@@ -51,18 +51,18 @@ class CustomCard extends StatefulWidget {
 }
 
 class _CustomCardState extends State<CustomCard> {
-  Color cardColor = Colors.transparent;
+  Color cardColor = Colors.white.withOpacity(0.2);
 
   void _onTap() {
     widget.onTap?.call();
-    setState(() {
-      cardColor = const Color.fromARGB(220, 231, 120, 86);
-    });
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        cardColor = Colors.transparent;
-      });
-    });
+    // setState(() {
+    //   cardColor = const Color.fromARGB(220, 231, 120, 86);
+    // });
+    // Future.delayed(const Duration(seconds: 1), () {
+    //   setState(() {
+    //     cardColor = Colors.transparent;
+    //   });
+    // });
   }
 
   @override
@@ -76,7 +76,7 @@ class _CustomCardState extends State<CustomCard> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
-            iconColor: Colors.white.withOpacity(0.5),
+            iconColor: Colors.white,
             leading: Icon(
               widget.icon,
             ),
