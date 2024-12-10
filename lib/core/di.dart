@@ -26,11 +26,11 @@ void setupCoreLocator() {
   sl.registerFactory(() => SignOutUseCase(sl<AuthRepository>()));
   sl.registerFactory(() => SignUpUsecase(sl<AuthRepository>()));
   sl.registerFactory(() => GetCurrentUserUseCase(sl<AuthRepository>()));
-  sl.registerFactory(() => LoadEventsUseCase(sl<ScheduleRepository>()));
+  
   sl.registerFactory(() => CreateEventUseCase(sl<ScheduleRepository>()));
   sl.registerFactory(() => DeleteEventUseCase(sl<ScheduleRepository>()));
   sl.registerFactory(() => UpdateEventUseCase(sl<ScheduleRepository>()));
-  sl.registerFactory(() => GetEventsByDateUseCase(sl<ScheduleRepository>()));
+  sl.registerFactory(() => GetCombinedEventUseCase(sl<ScheduleRepository>()));
 
   // Register bloc
   sl.registerFactory(
@@ -44,11 +44,10 @@ void setupCoreLocator() {
 
   sl.registerFactory(
     () => ScheduleBloc(
-      loadEventsUseCase: sl<LoadEventsUseCase>(),
+      getCombinedEventUseCase: sl<GetCombinedEventUseCase>(),
       createEventUseCase: sl<CreateEventUseCase>(),
       deleteEventUseCase: sl<DeleteEventUseCase>(),
       updateEventUseCase: sl<UpdateEventUseCase>(),
-      getEventsByDateUseCase: sl<GetEventsByDateUseCase>(),
     ),
   );
 }

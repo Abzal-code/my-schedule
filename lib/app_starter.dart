@@ -16,10 +16,7 @@ class AppStarter extends StatelessWidget {
             ),
         ),
         BlocProvider(
-          create: (BuildContext context) => sl<ScheduleBloc>()
-            ..add(
-              ScheduleEvent.getEventsByDate(DateTime.now()),
-            ),
+          create: (BuildContext context) => sl<ScheduleBloc>(),
         ),
       ],
       child: Builder(

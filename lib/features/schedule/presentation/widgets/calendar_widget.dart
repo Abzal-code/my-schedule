@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
+  final List<EventEntity> allEvents;
   final ValueChanged<DateTime> onDataChanged;
 
   const CalendarWidget({
     super.key,
     required this.onDataChanged,
+    required this.allEvents,
   });
 
   @override
@@ -54,11 +57,15 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         focusedDay: _focusedDate,
         selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
         onDaySelected: _onDateSelected,
+        eventLoader: (day) => widget.allEvents
+            .where((event) => isSameDay(day, event.eventDate))
+            .toList(),
       ),
     );
   }
 
   _onDateSelected(selectedDate, focusedDate) {
+    print('selected date $selectedDate');
     if (!isSameDay(_selectedDate, selectedDate)) {
       setState(() {
         _selectedDate = selectedDate;

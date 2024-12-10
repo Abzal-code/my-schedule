@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:my_shedule/core/base_bloc/base_bloc.dart';
-import 'package:my_shedule/core/usecases/usecase.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/domain/usecases/schedule_usecases.dart';
 
@@ -11,23 +11,42 @@ part 'schedule_states.dart';
 part 'schedule_bloc.freezed.dart';
 
 class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
-  final LoadEventsUseCase _loadEventsUseCase;
+  final GetCombinedEventUseCase _getCombinedEventUseCase;
   final CreateEventUseCase _createEventUseCase;
   final UpdateEventUseCase _updateEventUseCase;
   final DeleteEventUseCase _deleteEventUseCase;
-  final GetEventsByDateUseCase _getEventsByDateUseCase;
+
+  late final StreamSubscription _subscription;
+
   ScheduleBloc({
-    required LoadEventsUseCase loadEventsUseCase,
+    required GetCombinedEventUseCase getCombinedEventUseCase,
     required CreateEventUseCase createEventUseCase,
     required UpdateEventUseCase updateEventUseCase,
     required DeleteEventUseCase deleteEventUseCase,
-    required GetEventsByDateUseCase getEventsByDateUseCase,
-  })  : _loadEventsUseCase = loadEventsUseCase,
+  })  : _getCombinedEventUseCase = getCombinedEventUseCase,
         _createEventUseCase = createEventUseCase,
         _updateEventUseCase = updateEventUseCase,
         _deleteEventUseCase = deleteEventUseCase,
-        _getEventsByDateUseCase = getEventsByDateUseCase,
-        super(const ScheduleState.initial());
+        super(const ScheduleState.loading()) {
+    // Подписываемся на комбинированный поток событий
+    // Инициализируем поток с текущей датой (например, сегодняшней).
+    // Предполагается, что GetCombinedEventUseCase внутри инициализирует BehaviorSubject<DateTime>
+    // и при вызове call(date) устанавливает ее начальное значение.
+
+    _subscription = _getCombinedEventUseCase(DateTime.now()).listen(
+      (combined) {
+        if (combined.filteredEvents.isEmpty) {
+          emit(ScheduleState.empty(combined.allEvents));
+        } else {
+          emit(ScheduleState.loaded(
+              combined.filteredEvents, combined.allEvents));
+        }
+      },
+      onError: (error, stackTrace) {
+        emit(ScheduleState.error(error.toString()));
+      },
+    );
+  }
 
   @override
   Future<void> onEventHandler(
@@ -35,92 +54,56 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
     Emitter<ScheduleState> emit,
   ) async {
     await event.map(
-      loadEvents: (e) => _loadEvents(e, emit),
-      addEvent: (e) => _createEvent(e, emit),
-      updateEvent: (e) => _updateEvent(e, emit),
-      deleteEvent: (e) => _deleteEvent(e, emit),
-      getEventsByDate: (e) => _getEventsByDate(e, emit),
+      addEvent: (e) => _onAddEvent(e, emit),
+      updateEvent: (e) => _onUpdateEvent(e, emit),
+      deleteEvent: (e) => _onDeleteEvent(e, emit),
+      getEventsByDate: (e) => _onGetEventsByDate(e, emit),
     );
   }
 
-  Future<void> _loadEvents(
-    _LoadEvents event,
-    Emitter<ScheduleState> emit,
-  ) async {
-    emit(const ScheduleState.loading());
-
-    try {
-      await _emitLoadedEvents(emit);
-    } catch (e) {
-      emit(ScheduleState.error(e.toString()));
-    }
-  }
-
-  Future<void> _emitLoadedEvents(Emitter<ScheduleState> emit) async {
-    try {
-      await emit.forEach<List<EventEntity>>(
-        _loadEventsUseCase.call(const NoParams()),
-        onData: _mapEventsToState,
-      );
-    } catch (e) {
-      emit(ScheduleState.error(e.toString()));
-    }
-  }
-
-  ScheduleState _mapEventsToState(List<EventEntity> events) {
-    if (events.isEmpty) {
-      return const ScheduleState.empty();
-    } else {
-      return ScheduleState.loaded(events);
-    }
-  }
-
-  Future<void> _getEventsByDate(
+  Future<void> _onGetEventsByDate(
     _GetEventsByDate event,
     Emitter<ScheduleState> emit,
   ) async {
-    emit(const ScheduleState.loading());
-    try {
-      await emit.forEach<List<EventEntity>>(
-        _getEventsByDateUseCase.call(event.date),
-        onData: _mapEventsToState,
-      );
-    } catch (e) {
-      emit(ScheduleState.error(e.toString()));
-    }
+    _getCombinedEventUseCase(event.date);
   }
 
-  Future<void> _createEvent(
+  Future<void> _onAddEvent(
     _AddEvent event,
     Emitter<ScheduleState> emit,
   ) async {
     try {
-      await _createEventUseCase.call(event.event);
+      await _createEventUseCase(event.event);
     } catch (e) {
       emit(ScheduleState.error(e.toString()));
     }
   }
 
-  Future<void> _updateEvent(
+  Future<void> _onUpdateEvent(
     _UpdateEvent event,
     Emitter<ScheduleState> emit,
   ) async {
-    emit(const ScheduleState.loading());
     try {
-      await _updateEventUseCase.call(event.event);
+      await _updateEventUseCase(event.event);
     } catch (e) {
       emit(ScheduleState.error(e.toString()));
     }
   }
 
-  Future<void> _deleteEvent(
+  Future<void> _onDeleteEvent(
     _DeleteEvent event,
     Emitter<ScheduleState> emit,
   ) async {
     try {
-      await _deleteEventUseCase.call(event.event.id!);
+      await _deleteEventUseCase(event.event.id!);
     } catch (e) {
       emit(ScheduleState.error(e.toString()));
     }
+  }
+
+  @override
+  Future<void> close() {
+    _subscription.cancel();
+    return super.close();
   }
 }

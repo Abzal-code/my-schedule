@@ -17,13 +17,13 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   }
 
   @override
-  Stream<List<EventEntity>> getEvents() {
-    return _storageService.getEvents();
+  Future<void> updateEvent(EventEntity schedule) {
+    return _storageService.updateEvent(schedule);
   }
 
   @override
-  Future<void> updateEvent(EventEntity schedule) {
-    return _storageService.updateEvent(schedule);
+  Stream<List<EventEntity>> getEvents() {
+    return _storageService.getEvents();
   }
 
   @override

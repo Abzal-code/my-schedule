@@ -9,7 +9,7 @@ class ScheduleDb extends BaseDatabase {
   @override
   Future<void> onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE schedules (
+      CREATE TABLE schedule (
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
         description TEXT,
@@ -23,14 +23,14 @@ class ScheduleDb extends BaseDatabase {
   @override
   Future<void> onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < newVersion) {
-      await db.execute('ALTER TABLE schedules ADD COLUMN location TEXT');
+      await db.execute('ALTER TABLE schedule ADD COLUMN location TEXT');
     }
   }
 
   @override
   Future<void> onDowngrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion > newVersion) {
-      await db.execute('ALTER TABLE schedules DROP COLUMN location');
+      await db.execute('ALTER TABLE schedule DROP COLUMN location');
     }
   }
 }

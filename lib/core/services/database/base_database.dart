@@ -1,6 +1,8 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+typedef Dictionary = Map<String, dynamic>;
+
 /// Abstract class for managing the SQLite database
 abstract class BaseDatabase {
   static const String dbName = 'app_database.db';
@@ -47,29 +49,50 @@ abstract class BaseDatabase {
   }
 
   /// Insert a record into a table
-  Future<int> insert(String table, Map<String, dynamic> data) async {
+  Future<int> insert(
+    String table,
+    Dictionary data,
+  ) async {
     final db = await database;
-    return await db.insert(table, data,
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(
+      table,
+      data,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   /// Update a record in a table
-  Future<int> update(String table, Map<String, dynamic> data,
-      String whereClause, List<Object?> whereArgs) async {
+  Future<int> update(
+    String table,
+    Dictionary data,
+    String whereClause,
+    List<Object?> whereArgs,
+  ) async {
     final db = await database;
-    return await db.update(table, data,
-        where: whereClause, whereArgs: whereArgs);
+    return await db.update(
+      table,
+      data,
+      where: whereClause,
+      whereArgs: whereArgs,
+    );
   }
 
   /// Delete a record from a table
   Future<int> delete(
-      String table, String whereClause, List<Object?> whereArgs) async {
+    String table,
+    String whereClause,
+    List<Object?> whereArgs,
+  ) async {
     final db = await database;
-    return await db.delete(table, where: whereClause, whereArgs: whereArgs);
+    return await db.delete(
+      table,
+      where: whereClause,
+      whereArgs: whereArgs,
+    );
   }
 
   /// Query records from a table
-  Future<List<Map<String, dynamic>>> query(
+  Future<List<Dictionary>> query(
     String table, {
     List<String>? columns,
     String? where,

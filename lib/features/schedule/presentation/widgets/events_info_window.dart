@@ -49,15 +49,11 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
-                      loaded: (events) => EventsList(
+                      loaded: (events, allEvents) => EventsList(
                         scrollController: scrollController,
                         events: events,
                       ),
-                      gotEventsByDate: (events) => EventsList(
-                        scrollController: scrollController,
-                        events: events,
-                      ),
-                      empty: () => const Center(
+                      empty: (_) => const Center(
                         child: Text(
                           'No events',
                           style: TextStyle(
@@ -68,6 +64,15 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
                       ),
                       orElse: () => Container(
                         color: Colors.red,
+                        child: const Center(
+                          child: Text(
+                            'Error',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },

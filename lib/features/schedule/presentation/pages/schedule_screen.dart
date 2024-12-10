@@ -2,14 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shedule/core/utils/helpers.dart';
+
 import 'package:my_shedule/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
-import 'package:my_shedule/features/schedule/presentation/widgets/choose_get_events_widget.dart';
-import 'package:my_shedule/features/schedule/presentation/widgets/create_event_dialog.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/animated_background.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/calendar_widget.dart';
+import 'package:my_shedule/features/schedule/presentation/widgets/create_event_dialog.dart';
 import 'package:my_shedule/features/schedule/presentation/widgets/events_info_window.dart';
 
 class ScheduleScreen extends StatefulWidget {
@@ -20,6 +19,7 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
+  List<EventEntity> _allEvents = [];
   DateTime _selectedDate = DateTime.now();
 
   void _onDateSelected(DateTime selectedDate) {
@@ -52,37 +52,43 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          const Positioned.fill(child: AnimatedGradientDemo()),
-          ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SafeArea(
-                  child: Column(
-                    children: [
-                      CalendarWidget(
-                        onDataChanged: _onDateSelected,
-                      ),
-                      const SizedBox(height: 16),
-                      ChooseGetEvents(
-                        selectedDate: DateHelper.toDateTime(_selectedDate),
-                      ),
-                      const SizedBox(height: 16),
-                      Flexible(
-                        child: EventsInfoWindow(
-                          selectedDate: _selectedDate,
+      body: BlocListener<ScheduleBloc, ScheduleState>(
+        listener: (context, state) {
+          state.maybeWhen(
+            orElse: () => null,
+            loaded: (events, allEvents) => setState(() => _allEvents = allEvents),
+            empty: (List<EventEntity>? allEvents) => setState(() => _allEvents = allEvents ?? []),
+          );
+        },
+        child: Stack(
+          children: [
+            const Positioned.fill(child: AnimatedGradientDemo()),
+            ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        CalendarWidget(
+                          onDataChanged: _onDateSelected,
+                          allEvents: _allEvents,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        Flexible(
+                          child: EventsInfoWindow(
+                            selectedDate: _selectedDate,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
