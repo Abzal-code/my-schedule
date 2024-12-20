@@ -25,29 +25,40 @@ class DateHelper {
 
   static DateTime toDateTime(DateTime date) =>
       DateTime(date.year, date.month, date.day);
+
+  static List<DateTime> sortDateTimes(List<DateTime> dateTimes) {
+    dateTimes.sort((DateTime a, DateTime b) => a.compareTo(b));
+    return dateTimes;
+  }
+
+  static List<TimeOfDay> sortTimeOfDays(List<TimeOfDay> timeOfDays) {
+    timeOfDays.sort((TimeOfDay a, TimeOfDay b) => a.compareTo(b));
+    return timeOfDays;
+  }
+}
+
+extension on TimeOfDay {
+  compareTo(TimeOfDay b) {
+    if (hour < b.hour) {
+      return -1;
+    } else if (hour > b.hour) {
+      return 1;
+    } else {
+      return minute.compareTo(b.minute);
+    }
+  }
 }
 
 class TimeHelper {
   static TimeOfDay timeOfDayFromString(String timeString) {
-    final parts = timeString.split(':');
-    final hour = int.parse(parts[0]);
-    final minute = int.parse(parts[1]);
+    final List<String> parts = timeString.split(':');
+    final int hour = int.parse(parts[0]);
+    final int minute = int.parse(parts[1]);
     return TimeOfDay(hour: hour, minute: minute);
   }
 
   static String timeOfDayToString(TimeOfDay time) =>
       '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-}
-
-class StringHelper {
-  /// Обрезает строку до указанного количества символов и добавляет '...' в конце, если она длиннее.
-  static String truncate(
-    String text,
-    int maxLength,
-  ) {
-    if (text.length <= maxLength) return text;
-    return '${text.substring(0, maxLength)}...';
-  }
 }
 
 class MessageHelper {

@@ -53,15 +53,37 @@ class _EventsInfoWindowState extends State<EventsInfoWindow> {
                         scrollController: scrollController,
                         events: events,
                       ),
-                      empty: (_) => const Center(
-                        child: Text(
-                          'No events',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
+                      empty: (allEvents) =>
+                          allEvents == null || allEvents.isEmpty
+                              ? const Center(
+                                  child: Text(
+                                    'No events',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                )
+                              : Column(
+                                  children: [
+                                    const Text(
+                                      'All events',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    const Divider(
+                                      color: Colors.white,
+                                    ),
+                                    Expanded(
+                                      child: EventsList(
+                                        scrollController: scrollController,
+                                        events: allEvents,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                       orElse: () => Container(
                         color: Colors.red,
                         child: const Center(

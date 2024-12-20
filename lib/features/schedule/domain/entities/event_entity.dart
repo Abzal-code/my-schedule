@@ -7,7 +7,6 @@ class EventEntity extends Equatable {
   final String? id;
   final String title;
   final String? description;
-  final String? img;
   final DateTime eventDate;
   final TimeOfDay eventTime;
   final bool isCompleted;
@@ -16,7 +15,6 @@ class EventEntity extends Equatable {
     this.id,
     required this.title,
     this.description,
-    this.img,
     required this.eventDate,
     required this.eventTime,
     this.isCompleted = false,
@@ -28,20 +26,16 @@ class EventEntity extends Equatable {
       id: doc.id,
       title: data['title'] ?? '',
       description: data['description'] ?? '',
-      img: data['img'] ?? '',
-      eventDate: (data['eventDate'] as Timestamp).toDate(),
+      eventDate: data['eventDate'].toDate(),
       eventTime: TimeHelper.timeOfDayFromString(data['eventTime'] as String),
       isCompleted: data['isCompleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toMap() {
-    final Timestamp eventDate =
-        Timestamp.fromDate(DateHelper.toDateTime(this.eventDate));
     return {
       'title': title,
       'description': description,
-      'img': img,
       'eventDate': eventDate,
       'eventTime': TimeHelper.timeOfDayToString(eventTime),
       'isCompleted': isCompleted,
@@ -61,7 +55,6 @@ class EventEntity extends Equatable {
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
-      img: img ?? this.img,
       eventDate: eventDate ?? this.eventDate,
       eventTime: eventTime ?? this.eventTime,
       isCompleted: isCompleted ?? this.isCompleted,
@@ -75,7 +68,6 @@ class EventEntity extends Equatable {
         id,
         title,
         description,
-        img,
         eventDate,
         eventTime,
         isCompleted,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_shedule/core/utils/extensions.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 
 abstract class FirestoreService {
@@ -71,7 +72,8 @@ class FirestoreServiceImpl extends FirestoreService {
   Stream<List<EventEntity>> getEventsByDate(DateTime date) {
     final eventDate = DateTime(date.year, date.month, date.day);
     return _eventsCollection
-        .where('eventDate', isEqualTo: eventDate)
+        .where('eventDate',
+            isGreaterThan: eventDate.startOfDay, isLessThan: eventDate.endOfDay)
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map(

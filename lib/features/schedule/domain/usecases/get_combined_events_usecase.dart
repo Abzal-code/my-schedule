@@ -1,6 +1,5 @@
 part of 'schedule_usecases.dart';
 
-
 class CombinedEvents {
   final List<EventEntity> allEvents;
   final List<EventEntity> filteredEvents;
@@ -10,7 +9,8 @@ class CombinedEvents {
 
 class GetCombinedEventUseCase extends UseCaseStream<CombinedEvents, DateTime> {
   final ScheduleRepository _repository;
-  final BehaviorSubject<DateTime> _selectedDateSubject = BehaviorSubject<DateTime>.seeded(DateTime.now());
+  final BehaviorSubject<DateTime> _selectedDateSubject =
+      BehaviorSubject<DateTime>.seeded(DateTime.now());
 
   GetCombinedEventUseCase(this._repository);
 
@@ -22,11 +22,12 @@ class GetCombinedEventUseCase extends UseCaseStream<CombinedEvents, DateTime> {
       return _repository.getEventsByDate(date);
     });
 
-    return Rx.combineLatest2<List<EventEntity>, List<EventEntity>, CombinedEvents>(
+    return Rx.combineLatest2<List<EventEntity>, List<EventEntity>,
+        CombinedEvents>(
       allEventsStream,
       filteredEventsStream,
-      (all, filtered) => CombinedEvents(allEvents: all, filteredEvents: filtered),
+      (all, filtered) =>
+          CombinedEvents(allEvents: all, filteredEvents: filtered),
     );
   }
 }
-

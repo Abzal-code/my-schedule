@@ -28,11 +28,6 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
         _updateEventUseCase = updateEventUseCase,
         _deleteEventUseCase = deleteEventUseCase,
         super(const ScheduleState.loading()) {
-    // Подписываемся на комбинированный поток событий
-    // Инициализируем поток с текущей датой (например, сегодняшней).
-    // Предполагается, что GetCombinedEventUseCase внутри инициализирует BehaviorSubject<DateTime>
-    // и при вызове call(date) устанавливает ее начальное значение.
-
     _subscription = _getCombinedEventUseCase(DateTime.now()).listen(
       (combined) {
         if (combined.filteredEvents.isEmpty) {
