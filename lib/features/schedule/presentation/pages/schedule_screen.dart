@@ -56,8 +56,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         listener: (context, state) {
           state.maybeWhen(
             orElse: () => null,
-            loaded: (events, allEvents) => setState(() => _allEvents = allEvents),
-            empty: (List<EventEntity>? allEvents) => setState(() => _allEvents = allEvents ?? []),
+            loaded: (events, allEvents) =>
+                setState(() => _allEvents = allEvents),
+            empty: (List<EventEntity>? allEvents) =>
+                setState(() => _allEvents = allEvents ?? []),
           );
         },
         child: Stack(
@@ -70,12 +72,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: SafeArea(
                     child: Column(
+                      spacing: 16,
                       children: [
                         CalendarWidget(
                           onDataChanged: _onDateSelected,
                           allEvents: _allEvents,
                         ),
-                        const SizedBox(height: 16),
                         Flexible(
                           child: EventsInfoWindow(
                             selectedDate: _selectedDate,

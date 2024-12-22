@@ -70,10 +70,8 @@ class FirestoreServiceImpl extends FirestoreService {
 
   @override
   Stream<List<EventEntity>> getEventsByDate(DateTime date) {
-    final eventDate = DateTime(date.year, date.month, date.day);
     return _eventsCollection
-        .where('eventDate',
-            isGreaterThan: eventDate.startOfDay, isLessThan: eventDate.endOfDay)
+        .where('eventDate', isEqualTo: date)
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map(
