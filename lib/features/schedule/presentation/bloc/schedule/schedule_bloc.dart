@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:my_shedule/core/base_bloc/base_bloc.dart';
+import 'package:my_shedule/core/utils/extensions.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/domain/usecases/schedule_usecases.dart';
 
@@ -28,7 +29,7 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
         _updateEventUseCase = updateEventUseCase,
         _deleteEventUseCase = deleteEventUseCase,
         super(const ScheduleState.loading()) {
-    _subscription = _getCombinedEventUseCase(DateTime.now()).listen(
+    _subscription = _getCombinedEventUseCase(DateTime.now().startOfDay).listen(
       (combined) {
         if (combined.filteredEvents.isEmpty) {
           emit(ScheduleState.empty(combined.allEvents));

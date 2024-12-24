@@ -106,13 +106,12 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
 
   void _createEvent() {
     if (_formKey.currentState!.validate()) {
-      EventEntity event = EventEntity(
+      final EventEntity event = EventEntity(
         title: _titleController.text,
         id: widget.event?.id,
         description: _descriptionController.text,
-        eventDate: widget.selectedDate,
+        eventDate: widget.selectedDate.startOfDay,
         eventTime: picked,
-        isCompleted: false,
       );
       widget.event == null
           ? context.read<ScheduleBloc>().add(

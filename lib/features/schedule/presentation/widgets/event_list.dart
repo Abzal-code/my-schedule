@@ -42,7 +42,7 @@ class EventsList extends StatelessWidget {
             subtitle: Row(
               children: [
                 Text(
-                  '${events[index].eventDate}',
+                  DateHelper.formatDate(events[index].eventDate),
                   style: TextStyle(
                     color: colorScheme.surface,
                     fontSize: 12,
