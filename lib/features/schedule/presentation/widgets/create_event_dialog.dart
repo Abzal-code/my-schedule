@@ -98,8 +98,9 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
 
   Future<void> pickTime(BuildContext context) async {
     picked = (await context.showCustomTimePicker(
-      use24HourFormat: true,
-    ))!;
+          use24HourFormat: true,
+        )) ??
+        TimeOfDay.now();
     _selectedTimeController.text = picked.format(context);
     print('picked time $picked');
   }

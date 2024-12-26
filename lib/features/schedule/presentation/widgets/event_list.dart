@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shedule/core/utils/helpers.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 import 'package:my_shedule/features/schedule/presentation/bloc/schedule/schedule_bloc.dart';
-import 'package:my_shedule/features/schedule/presentation/pages/schedule_screen.dart';
+import 'package:my_shedule/features/schedule/presentation/screens/schedule_screen.dart';
 
 class EventsList extends StatelessWidget {
   final ScrollController? scrollController;

@@ -4,13 +4,15 @@ import 'package:my_shedule/core/router/auth_change_notifier.dart';
 import 'package:my_shedule/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:my_shedule/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:my_shedule/features/auth/presentation/screens/splash_screen.dart';
-import 'package:my_shedule/features/schedule/presentation/pages/schedule_screen.dart';
+import 'package:my_shedule/features/schedule/presentation/screens/schedule_screen.dart';
+import 'package:my_shedule/features/schedule/presentation/screens/settings_screen.dart';
 
 class Routes {
   static const String splash = '/';
   static const String signIn = '/signIn';
   static const String signUp = '/signUp';
   static const String schedule = '/schedule';
+  static const String settings = '/schedule/settings';
   static const String error = '/error';
 }
 
@@ -23,7 +25,6 @@ class AppRouter {
   late final GoRouter router = GoRouter(
     initialLocation: Routes.splash,
     debugLogDiagnostics: true,
-    routerNeglect: false,
     refreshListenable: authChangeNotifier,
     redirect: (context, state) {
       final isAuthenticated = authChangeNotifier.isAuthenticated;
@@ -68,6 +69,16 @@ class AppRouter {
         path: Routes.schedule,
         name: 'schedule',
         builder: (context, state) => const ScheduleScreen(),
+      ),
+      GoRoute(
+        path: Routes.error,
+        name: 'error',
+        builder: (context, state) => ErrorScreen(error: state.error),
+      ),
+      GoRoute(
+        path: Routes.settings,
+        name: 'settings',
+        builder: (context, state) => const SettingsScreen(),
       ),
     ],
   );

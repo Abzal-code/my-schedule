@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:my_shedule/core/utils/extensions.dart';
 import 'package:my_shedule/features/schedule/domain/entities/event_entity.dart';
 
 abstract class FirestoreService {

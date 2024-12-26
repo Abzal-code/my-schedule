@@ -20,7 +20,7 @@ extension TimePickerExtensions on BuildContext {
 }
 
 extension DateTimeExtensions on DateTime {
-  DateTime get startOfDay => DateTime(year, month, day, 0, 0, 0, 0, 0);
+  DateTime get startOfDay => DateTime(year, month, day, 0, 0, 0, 0);
   DateTime get endOfDay => startOfDay.add(const Duration(days: 1));
 }
 

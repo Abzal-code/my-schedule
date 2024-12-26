@@ -31,6 +31,8 @@ class ScheduleBloc extends BaseBloc<ScheduleEvent, ScheduleState> {
         super(const ScheduleState.loading()) {
     _subscription = _getCombinedEventUseCase(DateTime.now().startOfDay).listen(
       (combined) {
+        print(
+            'combined events ${combined.filteredEvents.length} - all ${combined.allEvents.length}');
         if (combined.filteredEvents.isEmpty) {
           emit(ScheduleState.empty(combined.allEvents));
         } else {

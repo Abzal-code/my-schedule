@@ -31,7 +31,7 @@ class AppStarter extends StatelessWidget {
             routeInformationParser: appRouter.router.routeInformationParser,
             routerDelegate: appRouter.router.routerDelegate,
             routeInformationProvider: appRouter.router.routeInformationProvider,
-            theme: lightMode,
+            // theme: lightMode,
           );
         },
       ),

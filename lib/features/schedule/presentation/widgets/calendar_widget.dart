@@ -52,8 +52,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         daysOfWeekStyle: _styleOfWeek,
         startingDayOfWeek: StartingDayOfWeek.monday,
         calendarStyle: _calendarStyle,
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
+        firstDay: DateTime(2010, 10, 16),
+        lastDay: DateTime(2030, 3, 14),
         focusedDay: _focusedDate,
         selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
         onDaySelected: _onDateSelected,
@@ -65,7 +65,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   }
 
   _onDateSelected(selectedDate, focusedDate) {
-    print('selected date $selectedDate');
     if (!isSameDay(_selectedDate, selectedDate)) {
       setState(() {
         _selectedDate = selectedDate;
